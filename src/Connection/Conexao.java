@@ -32,13 +32,13 @@ public class Conexao {
 
         } catch (ClassNotFoundException ex) {
 
-            System.out.println("Driver não encotrado.");
+            System.out.println("Driver não encotrado:" + ex);
 
         }
         
         try {
            
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecasbac", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki", "root", "");
 
             System.out.println("Conexão bem sucedida!");
             
@@ -80,7 +80,7 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(rawQuery);
-
+              
             return rs;
 
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class Conexao {
         this.getConnection();
 
         try {
-
+            
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
 

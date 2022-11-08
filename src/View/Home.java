@@ -4,6 +4,10 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Guilherme Freire
@@ -122,7 +126,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(306, Short.MAX_VALUE))
         );
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Guilherme Freire\\Pictures\\edit\\logo.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
