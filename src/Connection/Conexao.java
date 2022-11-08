@@ -40,7 +40,7 @@ public class Conexao {
            
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki", "root", "");
 
-            System.out.println("Conexão bem sucedida!");
+            System.out.println("Conexão Muito bem sucedida!");
             
             return conn;
 
