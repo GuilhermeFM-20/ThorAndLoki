@@ -17,15 +17,15 @@ import java.sql.ResultSet;
 public class Conexao {
 
     private Connection conn = null;
-    
-    public void myData(){
-        
+
+    public void myData() {
+
         this.getConnection();
-        
+
     }
 
     public Connection getConnection() {
-        
+
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
@@ -35,27 +35,27 @@ public class Conexao {
             System.out.println("Driver não encotrado:" + ex);
 
         }
-        
+
         try {
-           
+
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki", "root", "");
 
             System.out.println("Conexão Muito bem sucedida!");
-            
+
             return conn;
 
         } catch (SQLException e) {
 
             System.out.println("Conexão mal sucedida!" + e.getMessage());
-                 
+
         }
-        
+
         return null;
 
     }
 
     public void closeConnection() {
-        
+
         if (conn != null) {
 
             try {
@@ -69,74 +69,121 @@ public class Conexao {
             }
 
         }
-        
+
     }
 
     public ResultSet query(String rawQuery) {
-        
+
         this.getConnection();
-            
+
         try {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(rawQuery);
-              
+
             return rs;
 
         } catch (SQLException e) {
 
             System.out.println("Erro na consulta das informações:" + e.getMessage());
+            System.out.println("Query verify:" + rawQuery);
 
         }
-            
+
         return null;
-        
+
     }
-    
+
     public void save(String rawQuery) {
-        
+
         this.getConnection();
 
         try {
-            
+
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
-
 
         } catch (SQLException e) {
 
             System.out.println("Erro na inserção das informações: " + e.getMessage());
+            System.out.println("Query verify:" + rawQuery);
 
         }
-        
+
     }
-     
-    public int numRows(String rawQuery) {
-        
+
+    public void delet(String tabela, int id) {
+
         this.getConnection();
-             
+
+        String sub = tabela.substring(0, 4);
+        String rawQuery = " UPDATE " + tabela + " SET " + sub + "_status = 'off' WHERE " + sub + "_id = " + id;
+
+        try {
+
+            Statement stmt = conn.createStatement();
+            stmt.execute(rawQuery);
+
+        } catch (SQLException e) {
+
+            System.out.println("Erro na exclusão das informações:" + e.getMessage());
+            System.out.println("Query verify:" + rawQuery);
+
+        }
+
+    }
+
+    public ResultSet dataLoad(String tabela, int id) {
+
+        this.getConnection();
+
+        String sub = tabela.substring(0, 4);
+        String rawQuery = " SELECT * FROM " + tabela + " WHERE " + sub + "_id = " + id;
+
+        try {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(rawQuery);
+
+            return rs;
+
+        } catch (SQLException e) {
+
+            System.out.println("Erro na exclusão das informações:" + e.getMessage());
+            System.out.println("Query verify:" + rawQuery);
+
+        }
+
+        return null;
+
+    }
+
+    public int numRows(String rawQuery) {
+
+        this.getConnection();
+
         int i = 0;
 
         try {
 
-           Statement stmt = conn.createStatement();
-           ResultSet rs = stmt.executeQuery(rawQuery);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(rawQuery);
 
-           while(rs.next()){
+            while (rs.next()) {
 
-               i++;
+                i++;
 
-           }
+            }
 
         } catch (SQLException e) {
 
             System.out.println("Erro na consulta das informações:" + e.getMessage());
+            System.out.println("Query verify:" + rawQuery);
 
         }
-        
+
         return i;
 
     }
-     
-  
+
 }

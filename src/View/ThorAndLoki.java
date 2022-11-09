@@ -24,21 +24,15 @@ public class ThorAndLoki{
         
         Conexao conn = new Conexao();
         
-       conn.save(" INSERT INTO alunos(alun_nome,alun_cpf,alun_idade,alun_mensalidade,alun_multa,alun_endereco,alun_telefone) VALUES ('teste g2','1234567899',12,8.00,5.00,'vxcvvcxv','84 996741559')");
+        ResultSet rs = conn.dataLoad("alunos", 4);
         
-        ResultSet valor = conn.query("SELECT * FROM alunos");
-        
-        while(valor.next()){
+        while(rs.next()){
             
-              System.out.println(valor.getString("alun_nome"));
-              System.out.println(valor.getString("alun_cpf"));
+            System.out.println("Nome: " + rs.getString("alun_nome"));
             
         }
         
-        
-        System.out.println(conn.numRows("SELECT * FROM alunos"));
-        
-        
+        conn.delet("alunos", 4);
 
     }
     
