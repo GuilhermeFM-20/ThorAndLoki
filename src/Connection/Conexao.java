@@ -72,7 +72,7 @@ public class Conexao {
 
     }
 
-    public ResultSet query(String rawQuery) {
+    public ResultSet select(String rawQuery) {
 
         this.getConnection();
 
@@ -85,7 +85,7 @@ public class Conexao {
 
         } catch (SQLException e) {
 
-            System.out.println("Erro na consulta das informações:" + e.getMessage());
+            System.out.println("Erro na seleção das informações:" + e.getMessage());
             System.out.println("Query verify:" + rawQuery);
 
         }
@@ -94,7 +94,7 @@ public class Conexao {
 
     }
 
-    public void save(String rawQuery) {
+    public void query(String rawQuery) {
 
         this.getConnection();
 
@@ -105,7 +105,7 @@ public class Conexao {
 
         } catch (SQLException e) {
 
-            System.out.println("Erro na inserção das informações: " + e.getMessage());
+            System.out.println("Erro na query das informações: " + e.getMessage());
             System.out.println("Query verify:" + rawQuery);
 
         }
