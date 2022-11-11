@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Nov-2022 às 19:16
+-- Tempo de geração: 11-Nov-2022 às 16:38
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -35,7 +35,8 @@ CREATE TABLE `alunos` (
   `alun_mensalidade` decimal(10,2) NOT NULL,
   `alun_multa` decimal(10,2) DEFAULT NULL,
   `alun_endereco` text DEFAULT NULL,
-  `alun_telefone` varchar(20) DEFAULT NULL
+  `alun_telefone` varchar(20) DEFAULT NULL,
+  `alun_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -48,7 +49,8 @@ CREATE TABLE `convidados` (
   `conv_id` int(11) NOT NULL,
   `conv_nome` varchar(50) NOT NULL,
   `conv_cpf` varchar(15) NOT NULL,
-  `conv_valor` decimal(10,2) NOT NULL
+  `conv_valor` decimal(10,2) NOT NULL,
+  `conv_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -63,7 +65,8 @@ CREATE TABLE `funcionario` (
   `func_salario` decimal(10,2) NOT NULL,
   `func_funcao` varchar(50) DEFAULT NULL,
   `func_endereco` text DEFAULT NULL,
-  `func_telefone` varchar(20) DEFAULT NULL
+  `func_telefone` varchar(20) DEFAULT NULL,
+  `func_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -79,7 +82,8 @@ CREATE TABLE `professores` (
   `prof_salario` decimal(10,2) DEFAULT NULL,
   `prof_endereco` text DEFAULT NULL,
   `prof_telefone` varchar(20) DEFAULT NULL,
-  `prof_horas` time DEFAULT NULL
+  `prof_horas` time DEFAULT NULL,
+  `prof_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

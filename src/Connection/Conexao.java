@@ -25,7 +25,8 @@ public class Conexao {
     }
 
     public Connection getConnection() {
-
+        
+        //Carrega os drivers do JDBC
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
@@ -36,6 +37,7 @@ public class Conexao {
 
         }
 
+        //Inicia a conexão no banco 
         try {
 
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki", "root", "");
@@ -57,7 +59,8 @@ public class Conexao {
     public void closeConnection() {
 
         if (conn != null) {
-
+            
+            
             try {
 
                 conn.close();

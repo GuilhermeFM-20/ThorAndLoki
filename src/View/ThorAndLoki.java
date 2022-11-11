@@ -32,7 +32,7 @@ public class ThorAndLoki{
             
         }
         
-        conn.delet("alunos", 4);
+        
 
     }
     
