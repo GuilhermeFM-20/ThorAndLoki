@@ -32,6 +32,8 @@ public class ThorAndLoki{
             
         }
         
+        conn.dataLoad("alunos", 1);
+        
         
 
     }
