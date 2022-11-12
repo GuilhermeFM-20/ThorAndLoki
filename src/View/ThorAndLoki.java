@@ -21,7 +21,12 @@ public class ThorAndLoki{
         Home home = new Home();
         
         home.setVisible(true);
-         
+        
+        Conexao conn = new Conexao();
+        
+        
+
+        
 
     }
     

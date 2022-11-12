@@ -7,8 +7,8 @@ public class Professores extends Pessoas{
     protected float salario;
     protected String horastrab;
     
-    public void Professores(String nome, String cpf, String endereco, String telefone, int idade,float salario, String horas_trab){
-        super.Pessoas(nome, cpf, endereco, telefone,idade);
+    public Professores(String nome, String cpf, String endereco, String telefone, int idade,float salario, String horas_trab){
+        super(nome, cpf, endereco, telefone,idade);
     }
     
     public float getSalario() {

@@ -20,7 +20,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
-        
+        setLocationRelativeTo(null);
         menu.addIcon(this);
         
     }
@@ -170,7 +170,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        Cadastro  menuCadastro = new Cadastro();
+        FiltroBusca  menuCadastro = new FiltroBusca();
         
         menuCadastro.setVisible(true);
         this.dispose();
