@@ -13,7 +13,7 @@ package Model.bean;
     protected String nome;
     protected String cpf;
     protected String endereco;
-    protected String telfone;
+    protected String telefone;
     protected int idade;
     
     public void Pessoas(String nome, String cpf, String endereco, String telefone, int idade){
@@ -21,7 +21,7 @@ package Model.bean;
         this.setNome(nome);
         this.setCpf(cpf);
         this.setEndereco(endereco);
-        this.setTelfone(telefone);
+        this.setTelefone(telefone);
         this.setIdade(idade);
         
     }
@@ -68,12 +68,12 @@ package Model.bean;
         
     }
 
-    public String getTelfone() {
-        return telfone;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTelfone(String telfone) {
-        this.telfone = telfone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
     
     
