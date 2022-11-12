@@ -21,20 +21,7 @@ public class ThorAndLoki{
         Home home = new Home();
         
         home.setVisible(true);
-        
-        Conexao conn = new Conexao();
-        
-        ResultSet rs = conn.dataLoad("alunos", 4);
-        
-        while(rs.next()){
-            
-            System.out.println("Nome: " + rs.getString("alun_nome"));
-            
-        }
-        
-        conn.dataLoad("alunos", 1);
-        
-        
+         
 
     }
     
