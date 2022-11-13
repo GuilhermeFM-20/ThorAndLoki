@@ -4,6 +4,7 @@
  */
 package View;
 
+import View.CadastroTeste.FiltroBusca;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
