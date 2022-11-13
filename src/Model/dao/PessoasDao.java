@@ -63,19 +63,56 @@ public class PessoasDao {
     }
     
     
-    public void addPessoa(Pessoas pessoa){
+    public void addPessoa(Pessoas pessoa) throws Exception{
+        
+        
     
         Conexao conn = new Conexao();
         
-        try{
+        String erro = "";
+        
+        if(pessoa.getNome().equals("Nome") || pessoa.getNome().equals("")){
+
+           erro += "Digite um nome, ";   
+           
+        }
+        
+        if(pessoa.getCpf().equals("CPF") || pessoa.getCpf().equals("")){
+
+           erro += "Digite um CPF, ";
+
+        }
+        if(pessoa.getEndereco().equals("Endereço") || pessoa.getEndereco().equals("")){
+
+           erro += "Digite um endereço, ";
+
+        }
+        if(pessoa.getTelefone().equals("Telefone") || pessoa.getTelefone().equals("") ){
+
+           erro += "Digite um Telefone ";
+
+        }
+        
+        
+        System.out.println(erro);
+        
+        if(!erro.equals("")){
             
-            conn.query("INSERT INTO alunos VALUES (DEFAULT,'"+ pessoa.getNome() +"','"+pessoa.getCpf()+"',19,70,8,'"+ pessoa.getEndereco()+"','"+pessoa.getTelefone()+"','on')");
-            JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Erro no cadastro: " + erro);
             
-        }catch(Exception ex){
+        }else{
+        
+            try{
             
-           JOptionPane.showMessageDialog(null, "Erro no cadastro!");
+                conn.query("INSERT INTO alunos VALUES (DEFAULT,'"+ pessoa.getNome() +"','"+pessoa.getCpf()+"',19,70,8,'"+ pessoa.getEndereco()+"','"+pessoa.getTelefone()+"','on')");
+                JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso!");
             
+            }catch(Exception ex){
+
+               JOptionPane.showMessageDialog(null, "Erro no cadastro!");
+
+            }
+        
         }
         
     

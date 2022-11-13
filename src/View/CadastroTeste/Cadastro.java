@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -354,7 +356,11 @@ public class Cadastro extends javax.swing.JFrame {
         Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),14);
         PessoasDao dao = new PessoasDao();
         
-        dao.addPessoa(pessoa);
+        try {
+            dao.addPessoa(pessoa);
+        } catch (Exception ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
