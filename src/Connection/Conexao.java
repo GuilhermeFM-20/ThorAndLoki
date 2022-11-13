@@ -83,7 +83,7 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(rawQuery);
-
+            System.out.println("Query verify:" + rawQuery);
             return rs;
 
         } catch (SQLException e) {
@@ -105,7 +105,7 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
-
+            System.out.println("Query verify:" + rawQuery);
         } catch (SQLException e) {
 
             System.out.println("Erro na query das informações: " + e.getMessage());
@@ -126,7 +126,7 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
-
+            System.out.println("Query verify:" + rawQuery);
         } catch (SQLException e) {
 
             System.out.println("Erro na exclusão das informações:" + e.getMessage());
@@ -147,12 +147,12 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(rawQuery);
-
+            System.out.println("Query verify:" + rawQuery);
             return rs;
 
         } catch (SQLException e) {
 
-            System.out.println("Erro na exclusão das informações:" + e.getMessage());
+            System.out.println("Erro ao carregar das informações:" + e.getMessage());
             System.out.println("Query verify:" + rawQuery);
 
         }
@@ -171,7 +171,7 @@ public class Conexao {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(rawQuery);
-
+            System.out.println("Query verify:" + rawQuery);
             while (rs.next()) {
 
                 i++;

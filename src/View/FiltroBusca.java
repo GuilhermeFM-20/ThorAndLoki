@@ -27,7 +27,11 @@ public class FiltroBusca extends javax.swing.JFrame {
         
         menu.addIcon(this);
         
+        
+        
         this.loadTable();
+        
+        
        
     }
     
@@ -46,7 +50,8 @@ public class FiltroBusca extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("alun_nome")
+                model.addRow(new Object[]{rs.getString("alun_id")
+                                          ,rs.getString("alun_nome")
                                           ,rs.getString("alun_cpf")
                                           ,rs.getString("alun_idade")
                                           ,rs.getString("alun_endereco")
@@ -277,7 +282,7 @@ public class FiltroBusca extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
+                "Id", "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
             }
         ));
         tabelaPessoas.setFocusable(false);
@@ -285,7 +290,16 @@ public class FiltroBusca extends javax.swing.JFrame {
         tabelaPessoas.setSelectionBackground(new java.awt.Color(102, 102, 102));
         tabelaPessoas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tabelaPessoas.getTableHeader().setReorderingAllowed(false);
+        tabelaPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaPessoasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaPessoas);
+        if (tabelaPessoas.getColumnModel().getColumnCount() > 0) {
+            tabelaPessoas.getColumnModel().getColumn(0).setResizable(false);
+            tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
+        }
 
         javax.swing.GroupLayout telefoneLayout = new javax.swing.GroupLayout(telefone);
         telefone.setLayout(telefoneLayout);
@@ -407,7 +421,6 @@ public class FiltroBusca extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-
         this.loadTable();
         
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -419,6 +432,20 @@ public class FiltroBusca extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
+        // TODO add your handling code here:
+        
+        int linha = tabelaPessoas.getSelectedRow();
+        
+        int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
+        
+        
+        Atualizar menu = new Atualizar(id_pessoa);
+        menu.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_tabelaPessoasMouseClicked
 
     /**
      * @param args the command line arguments

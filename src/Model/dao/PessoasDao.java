@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import Connection.Conexao;
 import Model.bean.Pessoas;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,7 +63,41 @@ public class PessoasDao {
     }
     
     
+    public void addPessoa(Pessoas pessoa){
     
-  
+        Conexao conn = new Conexao();
+        
+        try{
+            
+            conn.query("INSERT INTO alunos VALUES (DEFAULT,'"+ pessoa.getNome() +"','"+pessoa.getCpf()+"',19,70,8,'"+ pessoa.getEndereco()+"','"+pessoa.getTelefone()+"','on')");
+            JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso!");
+            
+        }catch(Exception ex){
+            
+           JOptionPane.showMessageDialog(null, "Erro no cadastro!");
+            
+        }
+        
+    
+    }
+    
+    public void updatePessoa(Pessoas pessoa,int id){
+    
+        Conexao conn = new Conexao();
+        
+        try{
+            
+            conn.query("UPDATE alunos SET alun_nome = '"+ pessoa.getNome() +"', alun_cpf =  '"+pessoa.getCpf()+"', alun_endereco = '"+ pessoa.getEndereco()+"', alun_telefone = '"+pessoa.getTelefone()+"' WHERE alun_id = " + id);
+            JOptionPane.showMessageDialog(null, "Pessoa atualizada com sucesso!");
+            
+        }catch(Exception ex){
+            
+           JOptionPane.showMessageDialog(null, "Erro na atualização!");
+            
+        }
+        
+    
+    }
+   
     
 }
