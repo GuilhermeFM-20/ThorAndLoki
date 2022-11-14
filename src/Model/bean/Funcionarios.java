@@ -4,6 +4,8 @@
  */
 package Model.bean;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gabriel
@@ -19,25 +21,24 @@ public class Funcionarios extends Pessoas{
         this.setFuncao(funcao);
     
     }
-    public float getSalario{}{
+    public float getSalario(){
         return salario;
-}
+    }
 
 
     public void setSalario(float salario) {
         if (salario > 0){
             this.salario = salario;
-        }
-        else{
+        }else{
             JOptionPane.showMessageDialog(null, "Salário inválido");
         }
     }
     
-    public String getFuncao{}{
+    public String getFuncao(){
         return funcao;
 }
     
-    public void setFuncao{float Funcao}{
+    public void setFuncao(String Funcao){
         this.funcao = funcao;
 }
     
