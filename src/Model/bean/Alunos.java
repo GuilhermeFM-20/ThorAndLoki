@@ -6,9 +6,12 @@ public class Alunos extends Pessoas{
     private float mensalidade;
     private float multaatraso;       
     
-    public Alunos(String nome, String cpf, String endereco, String telefone, int idade,float mensalidade, float multaatraso){
-
+    public Alunos(String nome, String cpf, String endereco, String telefone, int idade,String  mensalidade, float multaatraso){
+        
         super(nome, cpf, endereco, telefone,idade);
+        
+        this.setMensalidade(mensalidade);
+        this.setMultaAtraso(multaatraso);
         
     }
     
