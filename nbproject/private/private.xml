@@ -4,6 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/ThorAndLokiDev/src/Model/bean/Professores.java</file>
+            <file>file:/C:/Users/Dell/Documents/NetBeansProjects/ThorAndLokiDev/src/View/ThorAndLoki.java</file>
+=======
             <file>file:/C:/Users/Guilherme%20Freire/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Pessoas.java</file>
             <file>file:/C:/Users/Guilherme%20Freire/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Professores.java</file>
             <file>file:/C:/Users/Guilherme%20Freire/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Funcionarios.java</file>
@@ -19,6 +23,7 @@
 <<<<<<< HEAD
             <file>file:/C:/Users/jpss3/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Alunos.java</file>
             <file>file:/C:/Users/jpss3/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Pessoas.java</file>
+>>>>>>> 02701f91f69533f3e202358667d41d3186489530
 =======
             <file>file:/C:/Users/Ezilard%20Silva/Documents/NetBeansProjects/ThorAndLoki/src/View/ThorAndLoki.java</file>
             <file>file:/C:/Users/Ezilard%20Silva/Documents/NetBeansProjects/ThorAndLoki/src/View/Home.java</file>
@@ -31,7 +36,10 @@
             <file>file:/C:/Users/Ezilard%20Silva/Documents/NetBeansProjects/ThorAndLoki/src/Connection/Conexao.java</file>
             <file>file:/C:/Users/Ezilard%20Silva/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Pessoas.java</file>
 >>>>>>> 3203ae323f5b2204c25700b96a8eb5b97fd66cc2
+<<<<<<< HEAD
+=======
 >>>>>>> 6bbf53b1bee1b890904809cc2d385bb6076332f8
+>>>>>>> 02701f91f69533f3e202358667d41d3186489530
         </group>
     </open-files>
 </project-private>
