@@ -8,7 +8,7 @@ package Model.bean;
  *
  * @author Guilherme Freire
  */
- class  Pessoas{
+ public class Pessoas{
     
     protected String nome;
     protected String cpf;
@@ -16,7 +16,7 @@ package Model.bean;
     protected String telefone;
     protected int idade;
     
-    public void Pessoas(String nome, String cpf, String endereco, String telefone, int idade){
+    public Pessoas(String nome, String cpf, String endereco, String telefone, int idade){
         
         this.setNome(nome);
         this.setCpf(cpf);

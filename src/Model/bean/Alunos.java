@@ -6,9 +6,9 @@ public class Alunos extends Pessoas{
     private float mensalidade;
     private float multaatraso;       
     
-    public void Alunos(String nome, String cpf, String endereco, String telefone, int idade,float mensalidade, float multaatraso){
+    public Alunos(String nome, String cpf, String endereco, String telefone, int idade,float mensalidade, float multaatraso){
 
-        super.Pessoas(nome, cpf, endereco, telefone,idade);
+        super(nome, cpf, endereco, telefone,idade);
         
     }
     
