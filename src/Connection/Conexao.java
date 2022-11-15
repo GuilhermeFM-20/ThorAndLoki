@@ -106,6 +106,7 @@ public class Conexao {
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
             System.out.println("Query verify:" + rawQuery);
+            
         } catch (SQLException e) {
 
             System.out.println("Erro na query das informações: " + e.getMessage());
