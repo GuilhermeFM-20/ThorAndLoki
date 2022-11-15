@@ -17,13 +17,10 @@ public class Funcionarios extends Pessoas{
         
         this.setSalario(salario);
         this.setFuncao(funcao);
-    
     }
     public float getSalario{}{
         return salario;
 }
-
-
     public void setSalario(float salario) {
         if (salario > 0){
             this.salario = salario;
@@ -32,13 +29,10 @@ public class Funcionarios extends Pessoas{
             JOptionPane.showMessageDialog(null, "Salário inválido");
         }
     }
-    
     public String getFuncao{}{
         return funcao;
-}
-    
+}  
     public void setFuncao{float Funcao}{
         this.funcao = funcao;
-}
-    
+}  
 }
