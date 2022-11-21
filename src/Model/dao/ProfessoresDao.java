@@ -54,9 +54,9 @@ public class ProfessoresDao {
             addQuerry += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
             
         }
-        if (!professores.getSalario().equals("Salário") && !professores.getSalario().equals("")){
+        if (professores.getSalario() > 0){
         
-            addQuerry += "AND prof_salario LIKE '%" + professores.getSalario().trim() + "'%";
+            addQuerry += "AND prof_salario LIKE '%" + professores.getSalario() + "'%";
         
         }
         if (!professores.getHoras_trab().equals("Horas de Trabalho") && !professores.getHoras_trab().equals("")){

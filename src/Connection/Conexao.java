@@ -116,7 +116,7 @@ public class Conexao {
 
     }
 
-    public void delet(String tabela, int id) {
+    public void delete(String tabela, int id) {
 
         this.getConnection();
 

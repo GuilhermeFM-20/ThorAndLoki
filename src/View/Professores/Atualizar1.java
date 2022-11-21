@@ -448,7 +448,7 @@ public class Atualizar1 extends javax.swing.JFrame {
         
         try{
             
-            conn.delet("alunos", this.getId_pessoa());
+            conn.delete("alunos", this.getId_pessoa());
             JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
             
         }catch(Exception ex){
