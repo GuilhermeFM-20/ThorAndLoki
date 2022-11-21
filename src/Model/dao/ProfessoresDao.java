@@ -66,7 +66,6 @@ public class ProfessoresDao {
         }
         
         ResultSet rs = conn.select(" SELECT * FROM alunos WHERE prof_status != 'off' " + addQuerry);
-    
         return rs;
     
     
