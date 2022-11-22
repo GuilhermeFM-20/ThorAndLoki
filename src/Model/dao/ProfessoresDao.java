@@ -54,11 +54,11 @@ public class ProfessoresDao {
             addQuerry += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
             
         }
-        if (professores.getSalario() > 0){
+        /*if (professores.getSalario() > 0){
         
             addQuerry += "AND prof_salario LIKE '%" + professores.getSalario() + "'%";
         
-        }
+        }*/
         if (!professores.getHoras_trab().equals("Horas de Trabalho") && !professores.getHoras_trab().equals("")){
         
             addQuerry += "AND prof_horas LIKE '%" + professores.getHoras_trab().trim() + "'%";
