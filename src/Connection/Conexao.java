@@ -106,6 +106,7 @@ public class Conexao {
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
             System.out.println("Query verify:" + rawQuery);
+            
         } catch (SQLException e) {
 
             System.out.println("Erro na query das informações: " + e.getMessage());
@@ -115,7 +116,7 @@ public class Conexao {
 
     }
 
-    public void delet(String tabela, int id) {
+    public void delete(String tabela, int id) {
 
         this.getConnection();
 
