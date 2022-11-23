@@ -4,7 +4,7 @@
  */
 package View;
 
-import View.CadastroTeste.FiltroBusca;
+import View.CadastroTeste.FiltroBuscaProf;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -171,7 +171,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        FiltroBusca  menuCadastro = new FiltroBusca();
+        FiltroBuscaProf  menuCadastro = new FiltroBuscaProf();
         
         menuCadastro.setVisible(true);
         this.dispose();

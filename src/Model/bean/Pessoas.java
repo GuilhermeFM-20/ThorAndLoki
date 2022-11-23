@@ -14,7 +14,6 @@ package Model.bean;
     protected String cpf;
     protected String endereco;
     protected String telefone;
-    protected int idade;
     
     public Pessoas(String nome, String cpf, String endereco, String telefone, int idade){
         
@@ -22,11 +21,11 @@ package Model.bean;
         this.setCpf(cpf);
         this.setEndereco(endereco);
         this.setTelefone(telefone);
-        this.setIdade(idade);
+        //this.setIdade(idade);
         
     }
 
-    public int getIdade() {
+    /*public int getIdade() {
         return idade;
     }
 
@@ -40,7 +39,7 @@ package Model.bean;
             this.idade = idade;
             
         }
-    }
+    }*/
 
     public String getNome() {
         return nome;

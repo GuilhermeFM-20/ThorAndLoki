@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
+import View.Home;
 import View.ThorAndLoki;
 
 
@@ -17,7 +18,7 @@ import View.ThorAndLoki;
  *
  * @author Guilherme Freire
  */
-public class FiltroBusca extends javax.swing.JFrame {
+public class FiltroBuscaProf extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
@@ -25,7 +26,7 @@ public class FiltroBusca extends javax.swing.JFrame {
     
     ThorAndLoki mask = new ThorAndLoki();
     
-    public FiltroBusca() {
+    public FiltroBuscaProf() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
@@ -107,7 +108,6 @@ public class FiltroBusca extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jFormattedTextField4 = new javax.swing.JFormattedTextField();
         nome1 = new javax.swing.JTextField();
 
@@ -126,6 +126,11 @@ public class FiltroBusca extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(" MENU");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 169, 241));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,7 +203,7 @@ public class FiltroBusca extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro");
+        jLabel2.setText("Filtro de Busca");
 
         horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         horas.setForeground(new java.awt.Color(51, 51, 51));
@@ -315,10 +320,6 @@ public class FiltroBusca extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Endereço:");
 
-        jFormattedTextField2.setBorder(null);
-        jFormattedTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
-
         jFormattedTextField4.setBorder(null);
         jFormattedTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
@@ -376,11 +377,6 @@ public class FiltroBusca extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(telefoneLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         telefoneLayout.setVerticalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,11 +410,6 @@ public class FiltroBusca extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
-            .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(telefoneLayout.createSequentialGroup()
-                    .addGap(0, 310, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 310, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -513,6 +504,17 @@ public class FiltroBusca extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_horasKeyReleased
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:]
+        
+        Home menu = new Home();
+        
+        menu.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -530,14 +532,22 @@ public class FiltroBusca extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -550,7 +560,7 @@ public class FiltroBusca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltroBusca().setVisible(true);
+                new FiltroBuscaProf().setVisible(true);
                 
                 
                 
@@ -568,7 +578,6 @@ public class FiltroBusca extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
