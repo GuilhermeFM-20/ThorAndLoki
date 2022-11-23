@@ -68,7 +68,82 @@ public class ProfessoresDao {
         ResultSet rs = conn.select(" SELECT * FROM alunos WHERE prof_status != 'off' " + addQuerry);
         return rs;
     
-    
     }
+    
+    public void addProfessores (Professores professores) throws Exception{
+            
+            
+        
+        Conexao conn = new Conexao();
+            
+        String erro = "";
+            
+        if(professores.getNome().equals("Nome") || (professores.getNome().equals(""))){
+            erro += "Digite um nome, ";
+                
+        }
+        if(professores.getCpf().equals("CPF") || (professores.getCpf().equals(""))){
+            erro += "Digite um CPF, ";
+                
+        }
+        if(professores.getEndereco().equals("Endereço") || (professores.getEndereco().equals(""))){
+            erro += "Digite um endereço, ";
+                
+        }
+        if(professores.getTelefone().equals("Telefone") || (professores.getTelefone().equals(""))){
+            erro += "Digite um Telefone, ";
+                
+        }
+        if(professores.getHoras_trab().equals("Horas de trabalho") || (professores.getHoras_trab().equals(""))){
+            erro += "Digite as horas de trabalho, ";
+                
+        }
+        if (professores.getSalario().equals("Salário") || (professores.getSalario.().equals(""))){
+            erro += "Digite o salário, ";
+                
+        }
+            
+        System.out.println(erro);
+            
+        if(!erro.equals("")){
+            JOptionPane.showMessageDialog(null, "Erro no cadastro: " + erro);
+                
+        }else{
+                
+            try{
+                    
+                conn.query("INSERT INTO professores VALUES (DEFAULT,'"+ professores.getNome() +"','"+professores.getCpf()+"','"+ professores.getEndereco()+"','"+professores.getTelefone()+"','"+professores.getSalario()+"','"+professores.getHoras_trab()+"','on')");
+                JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso");
+                    
+            }catch(Exception ex){
+                    
+                JOptionPane.showMessageDialog(null, "Erro no cadastro");
+                    
+            }
+            
+            
+        }
+        
+            
+    }
+    
+    public void updateProfessores(Professores professores,int id){
+        
+        Conexao conn = new Conexao();
+        
+        try{
+            
+            conn.query("UPDATE professores SET prof_nome = '"+ professores.getNome() +"', prof_cpf =  '"+professores.getCpf()+"', prof_endereco = '"+ professores.getEndereco()+"', prof_telefone = '"+professores.getTelefone()+"', prof_salario = '"+professores.getSalario()+"', prof_horas = '"+professores.getHoras_trab()+"' WHERE prof_id = " + id);
+            
+        }
+        catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, "Erro na atualização");
+            
+        }
+        
+        
+    }
+    
     
 }
