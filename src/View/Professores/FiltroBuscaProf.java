@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
 import Model.bean.Professores;
+import Model.dao.ProfessoresDao;
 import View.ThorAndLoki;
 
 /**
@@ -40,9 +41,16 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
     
     public void loadTable(){
         
+        String salarioBusca = "0.00";
         
-        Professores professores = new Professores(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), Float.parseFloat(salario.getText().toString()), horas.getText());
-        PessoasDao dao = new PessoasDao();
+        if(!salario.getText().equals("")){
+          
+            salarioBusca = salario.getText();
+            
+        }
+        
+        Professores professores = new Professores(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), Float.parseFloat(salarioBusca), horas.getText());
+        ProfessoresDao dao = new ProfessoresDao();
         ResultSet rs = dao.loadSearch(professores);
         
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
@@ -53,12 +61,12 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("alun_id")
-                                          ,rs.getString("alun_nome")
-                                          ,rs.getString("alun_cpf")
-                                          ,rs.getString("alun_idade")
-                                          ,rs.getString("alun_endereco")
-                                          ,rs.getString("alun_telefone")});
+                model.addRow(new Object[]{rs.getString("prof_id")
+                                          ,rs.getString("prof_nome")
+                                          ,rs.getString("prof_cpf")
+                                          ,rs.getString("prof_idade")
+                                          ,rs.getString("prof_endereco")
+                                          ,rs.getString("prof_telefone")});
 
             }
             
@@ -365,7 +373,7 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +382,7 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -27,9 +27,7 @@ public class ProfessoresDao {
     }
     
     public ResultSet loadSearch(Professores professores){
-        
-        System.out.println("entrou");
-    
+       
     
         Conexao conn = new Conexao();
         String addQuery = "";
@@ -54,6 +52,7 @@ public class ProfessoresDao {
             addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
             
         }
+<<<<<<< HEAD
         if (professores.getSalario() > 0){
         
             addQuery += "AND prof_salario LIKE '%" + professores.getSalario() + "'%";
@@ -66,11 +65,25 @@ public class ProfessoresDao {
         }
         
         ResultSet rs = conn.select(" SELECT * FROM professores WHERE prof_status != 'off' " + addQuery);
+=======
+        if (professores.getSalario() != 0.00){
+        
+            addQuerry += "AND prof_salario = '" + professores.getSalario();
+        
+        }
+        if (!professores.getHoras_trab().equals("Horas") && !professores.getHoras_trab().equals("")){
+        
+            addQuerry += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "'%";
+        
+        }
+        
+        ResultSet rs = conn.select(" SELECT * FROM professores WHERE prof_status != 'off' " + addQuerry);
+>>>>>>> b3c9fac38272609cf4bf858fed239499dc66dd30
         return rs;
     
     }
     
-    public void addProfessores (Professores professores) throws Exception{
+    public void addProfessores(Professores professores) throws Exception{
             
             
         
@@ -98,7 +111,11 @@ public class ProfessoresDao {
             erro += "Digite as horas de trabalho, ";
                 
         }
+<<<<<<< HEAD
         if (professores.getSalario() <= 0){
+=======
+        if (professores.getSalario() <= 0.00){
+>>>>>>> b3c9fac38272609cf4bf858fed239499dc66dd30
             erro += "Digite o salário, ";
 
         }
