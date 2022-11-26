@@ -4,17 +4,23 @@
  */
 package View;
 
+<<<<<<< HEAD
 import View.CadastroTeste.FiltroBusca;
 import View.Convidados.FiltroBuscaConvidados;
+=======
+import View.Professores.FiltroBuscaProf;
+>>>>>>> b75af1a3c9d695dfb7254bdd8411f0f58614654e
 import javax.swing.JOptionPane;
-
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author Guilherme Freire
  */
 public class Home extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form Home
@@ -177,7 +183,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        FiltroBusca  menuCadastro = new FiltroBusca();
+        FiltroBuscaProf  menuCadastro = new FiltroBuscaProf();
         
         menuCadastro.setVisible(true);
         this.dispose();

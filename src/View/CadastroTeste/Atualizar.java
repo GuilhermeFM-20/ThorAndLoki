@@ -7,6 +7,7 @@ package View.CadastroTeste;
 import Connection.Conexao;
 import Model.bean.Pessoas;
 import  Model.dao.PessoasDao;
+import View.Home;
 import View.ThorAndLoki;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -128,6 +129,11 @@ public class Atualizar extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(" MENU");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 169, 241));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,7 +299,7 @@ public class Atualizar extends javax.swing.JFrame {
         nome.setForeground(new java.awt.Color(51, 51, 51));
         nome.setToolTipText("");
         nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeActionPerformed(evt);
@@ -315,18 +321,15 @@ public class Atualizar extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel5)
-                                .addGap(324, 324, 324)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 229, Short.MAX_VALUE))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel5)
+                        .addGap(324, 324, 324)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +353,7 @@ public class Atualizar extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel7)
                                     .addComponent(jFormattedTextField4))))))
-                .addContainerGap())
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,10 +409,11 @@ public class Atualizar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -437,7 +441,7 @@ public class Atualizar extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        FiltroBusca menu = new FiltroBusca();
+        FiltroBuscaProf menu = new FiltroBuscaProf();
         
         System.out.println(nome.getText());
         
@@ -456,7 +460,7 @@ public class Atualizar extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         
-        FiltroBusca menu = new FiltroBusca();
+        FiltroBuscaProf menu = new FiltroBuscaProf();
         menu.loadTable();
         menu.setVisible(true);
         this.dispose();
@@ -467,21 +471,27 @@ public class Atualizar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Conexao conn = new Conexao();
-        FiltroBusca menu = new FiltroBusca();
+        FiltroBuscaProf menu = new FiltroBuscaProf();
         
-        try{
+        int verificacao = JOptionPane.showConfirmDialog(null, "Deseja excluir esse cliente?");
+        
+        if(verificacao == 0){
+        
+            try{
+
+                conn.delete("alunos", this.getId_pessoa());
+                JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
+
+            }catch(Exception ex){
+
+                JOptionPane.showMessageDialog(null, "Erro na exclusão!");
+            }
             
-            conn.delete("alunos", this.getId_pessoa());
-            JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
-            
-        }catch(Exception ex){
-            
-            JOptionPane.showMessageDialog(null, "Erro na exclusão!");
+            menu.loadTable();
+            menu.setVisible(true);
+            this.dispose();
+        
         }
-        
-        menu.loadTable();
-        menu.setVisible(true);
-        this.dispose();
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -509,6 +519,17 @@ public class Atualizar extends javax.swing.JFrame {
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        
+        Home menu = new Home();
+        
+        menu.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments

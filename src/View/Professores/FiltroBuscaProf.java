@@ -12,18 +12,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
 import Model.bean.Professores;
+import Model.dao.ProfessoresDao;
 import View.ThorAndLoki;
 
 /**
  *
  * @author Guilherme Freire
  */
-public class FiltroBusca1 extends javax.swing.JFrame {
+public class FiltroBuscaProf extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
-    public FiltroBusca1() {
+    public FiltroBuscaProf() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
@@ -40,9 +41,16 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     
     public void loadTable(){
         
+        String salarioBusca = "0.00";
         
-        Professores professores = new Professores(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), Float.parseFloat(salario.getText()), horas.getText());
-        PessoasDao dao = new PessoasDao();
+        if(!salario.getText().equals("")){
+          
+            salarioBusca = salario.getText();
+            
+        }
+        
+        Professores professores = new Professores(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), Float.parseFloat(salarioBusca), horas.getText());
+        ProfessoresDao dao = new ProfessoresDao();
         ResultSet rs = dao.loadSearch(professores);
         
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
@@ -53,12 +61,12 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("alun_id")
-                                          ,rs.getString("alun_nome")
-                                          ,rs.getString("alun_cpf")
-                                          ,rs.getString("alun_idade")
-                                          ,rs.getString("alun_endereco")
-                                          ,rs.getString("alun_telefone")});
+                model.addRow(new Object[]{rs.getString("prof_id")
+                                          ,rs.getString("prof_nome")
+                                          ,rs.getString("prof_cpf")
+                                          ,rs.getString("prof_idade")
+                                          ,rs.getString("prof_endereco")
+                                          ,rs.getString("prof_telefone")});
 
             }
             
@@ -202,7 +210,6 @@ public class FiltroBusca1 extends javax.swing.JFrame {
 
         salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         salario.setForeground(new java.awt.Color(51, 51, 51));
-        salario.setText("Salário");
         salario.setBorder(null);
         salario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,7 +373,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,7 +382,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -465,14 +472,30 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -493,7 +516,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltroBusca1().setVisible(true);
+                new FiltroBuscaProf().setVisible(true);
                 
                 
                 
