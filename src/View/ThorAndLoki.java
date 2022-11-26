@@ -80,11 +80,44 @@ public class ThorAndLoki{
     
     public String maskValor(float valor){
         
+        System.out.println(valor);
         
         Locale localBrasil = new Locale("pt", "BR");
         String moeda = NumberFormat.getCurrencyInstance(localBrasil).format(valor);
         
         return moeda.substring(2,moeda.length());
+        
+    }
+    
+    public void menu(String select){
+        
+        switch(select){
+            case "Professores":
+                
+                    View.Professores.FiltroBuscaProf home = new View.Professores.FiltroBuscaProf();
+        
+                    home.setVisible(true);
+                
+               break;
+            case "Alunos":
+                
+                View.CadastroTeste.FiltroBuscaProf home1 = new View.CadastroTeste.FiltroBuscaProf();
+                home1.setVisible(true);
+                
+               break;
+            case "Funcionarios":
+                
+                System.out.println("Funcionarios");
+                
+               break;
+            case "Visitantes":
+                
+                System.out.println("Visitantes");
+                
+               break;
+            
+        }
+        
         
     }
     

@@ -20,13 +20,9 @@ public class Professores extends Pessoas{
     }
     
     public void setSalario(float salario) {
-        if (salario > 0){
-            this.salario = salario;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Salário inválido");
-        }
-        
+       
+        this.salario = salario;
+      
     }
     
     public String getHoras_trab() {
