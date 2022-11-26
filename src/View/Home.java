@@ -4,12 +4,6 @@
  */
 package View;
 
-<<<<<<< HEAD
-import View.CadastroTeste.FiltroBusca;
-import View.Convidados.FiltroBuscaConvidados;
-=======
-import View.Professores.FiltroBuscaProf;
->>>>>>> b75af1a3c9d695dfb7254bdd8411f0f58614654e
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -183,8 +177,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        FiltroBuscaProf  menuCadastro = new FiltroBuscaProf();
-        
+        View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();        
         menuCadastro.setVisible(true);
         this.dispose();
         
@@ -198,8 +191,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        FiltroBuscaConvidados menuCadastro = new FiltroBuscaConvidados();
-        
+        View.Convidados.FiltroBuscaConvidados menuCadastro = new View.Convidados.FiltroBuscaConvidados();
         menuCadastro.setVisible(true);
         this.dispose();
 

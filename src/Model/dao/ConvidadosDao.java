@@ -50,7 +50,7 @@ public class ConvidadosDao {
             addQuery += " AND conv_cpf =  '" + convidado.getCpf().trim()+"'";
 
         }
-        if(!(convidado.getValor() > 0)){
+        if(!(convidado.getValor() <= 0.00)){
 
             addQuery += " AND conv_valor = " + convidado.getValor();
 
@@ -83,15 +83,12 @@ public class ConvidadosDao {
            erro += "Digite um CPF, ";
 
         }
-        if(convidado.getValor() > 0){
+        if(convidado.getValor() <= 0.00){
 
            erro += "Digite um valor, ";
 
         }
-     
         
-        
-        System.out.println(erro);
         
         if(!erro.equals("")){
             

@@ -297,7 +297,7 @@ public class Cadastro1 extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
 
-        FiltroBusca menu = new FiltroBusca();
+        FiltroBuscaConvidados menu = new FiltroBuscaConvidados();
 
         menu.setVisible(true);
         this.dispose();

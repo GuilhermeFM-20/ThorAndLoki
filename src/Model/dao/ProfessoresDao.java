@@ -50,40 +50,26 @@ public class ProfessoresDao {
         if (!professores.getTelefone().equals("Telefone") && !professores.getTelefone().equals("")){
         
             addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
+        }    
             
-        }
-<<<<<<< HEAD
-        if (professores.getSalario() > 0){
-        
-            addQuery += "AND prof_salario LIKE '%" + professores.getSalario() + "'%";
-        
-        }
-        if (!professores.getHoras_trab().equals("Horas de Trabalho") && !professores.getHoras_trab().equals("")){
-        
-            addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab().trim() + "'%";
-        
-        }
-        
-        ResultSet rs = conn.select(" SELECT * FROM professores WHERE prof_status != 'off' " + addQuery);
-=======
         if (professores.getSalario() != 0.00){
         
-            addQuerry += "AND prof_salario = '" + professores.getSalario();
+            addQuery += "AND prof_salario = '" + professores.getSalario();
         
         }
         if (!professores.getHoras_trab().equals("Horas") && !professores.getHoras_trab().equals("")){
         
-            addQuerry += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "'%";
+            addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "'%";
         
         }
         
-        ResultSet rs = conn.select(" SELECT * FROM professores WHERE prof_status != 'off' " + addQuerry);
->>>>>>> b3c9fac38272609cf4bf858fed239499dc66dd30
+        ResultSet rs = conn.select(" SELECT * FROM professores WHERE prof_status != 'off' " + addQuery);
+
         return rs;
     
     }
-    
-    public void addProfessores(Professores professores) throws Exception{
+   
+    public void addProfessores(Professores professores){
             
             
         
@@ -111,11 +97,8 @@ public class ProfessoresDao {
             erro += "Digite as horas de trabalho, ";
                 
         }
-<<<<<<< HEAD
-        if (professores.getSalario() <= 0){
-=======
+
         if (professores.getSalario() <= 0.00){
->>>>>>> b3c9fac38272609cf4bf858fed239499dc66dd30
             erro += "Digite o salário, ";
 
         }
@@ -140,7 +123,7 @@ public class ProfessoresDao {
             
             
         }
-        
+               
             
     }
     

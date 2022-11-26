@@ -26,13 +26,9 @@ public class Convidados extends Pessoas{
     }
     
     public void setValor(float valor){
-    if (valor > 0){
-            this.valor = valor;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Valor inválido.");
-        }
     
+            this.valor = valor;
+        
     }
     
     
