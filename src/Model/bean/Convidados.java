@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author kleyb
  */
-public class Visitantes extends Pessoas{ 
+public class Convidados extends Pessoas{ 
     
     private float valor;
     
-    public Visitantes(float valor,String nome, String cpf, String endereco, String telefone, int idade){
-        super(nome, cpf, endereco, telefone,idade);
+    public Convidados(float valor,String nome, String cpf ){
+        super(nome, cpf,"", "",0);
         
         this.setValor(valor);
         
