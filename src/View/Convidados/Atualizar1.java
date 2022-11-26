@@ -66,7 +66,7 @@ public class Atualizar1 extends javax.swing.JFrame {
             while(rs.next()){
                 nome.setText(rs.getString("conv_nome"));
                 cpf.setText(rs.getString("conv_cpf"));
-                cpf.setText(rs.getString("conv_valor"));
+                valor.setText(rs.getString("conv_valor"));
             }
         }catch(Exception ex){
             
