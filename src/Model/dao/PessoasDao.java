@@ -8,7 +8,12 @@ import java.sql.ResultSet;
 import Connection.Conexao;
 import Model.bean.Pessoas;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -39,9 +44,9 @@ public class PessoasDao {
             addQuery += " AND alun_nome LIKE '%" + pessoas.getNome().trim()+"%'";
 
         }
-        if(!pessoas.getCpf().equals("CPF") && !pessoas.getCpf().equals("")){
-
-            addQuery += " AND alun_cpf =  '" + pessoas.getCpf().trim()+"'";
+        if( !pessoas.getCpf().equals("")){
+  
+            addQuery += " AND alun_cpf =  '" + pessoas.getCpf()+"'";
 
         }
         if(!pessoas.getEndereco().equals("Endereço") && !pessoas.getEndereco().equals("")){
@@ -51,7 +56,7 @@ public class PessoasDao {
         }
         if(!pessoas.getTelefone().equals("Telefone") && !pessoas.getTelefone().equals("") ){
 
-            addQuery += " AND alun_telefone = " + pessoas.getTelefone().trim();
+            addQuery += " AND alun_telefone = '" + pessoas.getTelefone() + "'";
 
         }
 
@@ -135,6 +140,6 @@ public class PessoasDao {
         
     
     }
-   
+     
     
 }

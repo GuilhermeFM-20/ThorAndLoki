@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,17 +26,6 @@ public class Conexao {
     }
 
     public Connection getConnection() {
-        
-        //Carrega os drivers do JDBC
-        try {
-
-            Class.forName("com.mysql.jdbc.Driver");
-
-        } catch (ClassNotFoundException ex) {
-
-            System.out.println("Driver não encotrado:" + ex);
-
-        }
 
         //Inicia a conexão no banco 
         try {
@@ -49,6 +39,7 @@ public class Conexao {
         } catch (SQLException e) {
 
             System.out.println("Conexão mal sucedida!" + e.getMessage());
+            JOptionPane.showMessageDialog(null, e, "Banco de dados não está online! " + e.getMessage(), 0);
 
         }
 
@@ -106,6 +97,7 @@ public class Conexao {
             Statement stmt = conn.createStatement();
             stmt.execute(rawQuery);
             System.out.println("Query verify:" + rawQuery);
+            
         } catch (SQLException e) {
 
             System.out.println("Erro na query das informações: " + e.getMessage());
@@ -115,7 +107,7 @@ public class Conexao {
 
     }
 
-    public void delet(String tabela, int id) {
+    public void delete(String tabela, int id) {
 
         this.getConnection();
 
