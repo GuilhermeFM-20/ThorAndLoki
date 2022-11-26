@@ -246,7 +246,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
+                "Id", "Nome", "CPF", "Valor"
             }
         ));
         tabelaPessoas.setFocusable(false);
@@ -261,7 +261,6 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaPessoas);
         if (tabelaPessoas.getColumnModel().getColumnCount() > 0) {
-            tabelaPessoas.getColumnModel().getColumn(0).setResizable(false);
             tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
         }
 
@@ -377,7 +376,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
@@ -411,7 +410,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
         int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
 
-        Atualizar menu = new Atualizar(id_pessoa);
+        View.Convidados.Atualizar1 menu = new View.Convidados.Atualizar1(id_pessoa);
         menu.setVisible(true);
         this.dispose();
 
@@ -420,7 +419,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        Cadastro menu = new Cadastro();
+        View.Convidados.Cadastro1 menu = new View.Convidados.Cadastro1();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
