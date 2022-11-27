@@ -34,32 +34,32 @@ public class ProfessoresDao {
     
         if (!professores.getNome().equals("Nome") && !professores.getNome().equals("")){
         
-            addQuery += "AND prof_nome LIKE '%" + professores.getNome().trim() + "'%";
+            addQuery += "AND prof_nome LIKE '%" + professores.getNome().trim() + "%'";
         
         }
         if (!professores.getCpf().equals("CPF") && !professores.getCpf().equals("")){
         
-            addQuery += "AND prof_cpf LIKE '%" + professores.getCpf().trim() + "'%";
+            addQuery += "AND prof_cpf LIKE '%" + professores.getCpf().trim() + "%'";
         
         }
         if (!professores.getEndereco().equals("Endereço") && !professores.getEndereco().equals("")){
         
-            addQuery += "AND prof_endereco LIKE '%" + professores.getEndereco().trim() + "'%";
+            addQuery += "AND prof_endereco LIKE '%" + professores.getEndereco().trim() + "%'";
         
         }
         if (!professores.getTelefone().equals("Telefone") && !professores.getTelefone().equals("")){
         
-            addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
-        }    
+            addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "%'";
             
+        }
         if (professores.getSalario() != 0.00){
         
-            addQuery += "AND prof_salario = '" + professores.getSalario();
+            addQuery += "AND prof_salario = " + professores.getSalario();
         
         }
         if (!professores.getHoras_trab().equals("Horas") && !professores.getHoras_trab().equals("")){
         
-            addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "'%";
+            addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "%'";
         
         }
         
@@ -112,7 +112,7 @@ public class ProfessoresDao {
                 
             try{
                     
-                conn.query("INSERT INTO professores VALUES (DEFAULT,'"+ professores.getNome() +"','"+professores.getCpf()+"','"+ professores.getEndereco()+"','"+professores.getTelefone()+"','"+professores.getSalario()+"','"+professores.getHoras_trab()+"','on')");
+                conn.query("INSERT INTO professores VALUES (DEFAULT,'"+ professores.getNome() +"','"+professores.getCpf()+"',"+ professores.getSalario()+",'"+professores.getEndereco()+"','"+professores.getTelefone()+"','"+professores.getHoras_trab()+"','on')");
                 JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso");
                     
             }catch(Exception ex){
