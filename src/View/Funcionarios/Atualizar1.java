@@ -2,35 +2,79 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Professores;
+package View.Funcionarios;
 
-import View.CadastroTeste.*;
+import Connection.Conexao;
+import Model.bean.Funcionarios;
 import Model.bean.Pessoas;
-import  Model.dao.PessoasDao;
+import Model.dao.FuncionariosDao;
+import Model.dao.PessoasDao;
 import View.ThorAndLoki;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Guilherme Freire
  */
-public class Cadastro1 extends javax.swing.JFrame {
+public class Atualizar1 extends javax.swing.JFrame {
+
+    private int id_func;
 
     /**
      * Creates new form Home
      */
-    public Cadastro1() {
+
+    private Atualizar1() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Atualizar1(int id_func) {
         initComponents();
+
         ThorAndLoki menu = new ThorAndLoki();
+
         setLocationRelativeTo(null);
-        
+
         menu.addIcon(this);
-         
+
+        this.setId_func(id_func);
+
+        this.loadOnce(id_func);
+
+    }
+
+    public int getId_func() {
+        return id_func;
+    }
+
+    public void setId_func(int id) {
+        this.id_func = id;
+    }
+
+    public void loadOnce(int id) {
+
+        Conexao conn = new Conexao();
+
+        ResultSet rs = conn.dataLoad("funcionario", id);
+
+        try {
+
+            while (rs.next()) {
+                nome.setText(rs.getString("func_nome"));
+                funcao.setText(rs.getString("func_funcao"));
+                telefone.setText(rs.getString("func_telefone"));
+                endereco.setText(rs.getString("func_endereco"));
+                salario.setText(rs.getString("func_salario"));
+            }
+        } catch (Exception ex) {
+
+            System.out.println("Erro ao carregar os valores: " + ex);
+
+        }
+
     }
 
     /**
@@ -52,14 +96,14 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        salario = new javax.swing.JTextField();
-        cpf = new javax.swing.JTextField();
-        horas = new javax.swing.JTextField();
-        telefone = new javax.swing.JTextField();
-        endereco = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        salario = new javax.swing.JTextField();
+        funcao = new javax.swing.JTextField();
+        telefone = new javax.swing.JTextField();
+        nome = new javax.swing.JTextField();
+        endereco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -75,11 +119,6 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(" MENU");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
 
         jButton1.setBackground(new java.awt.Color(0, 169, 241));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,10 +132,20 @@ public class Cadastro1 extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Visitantes");
+        jButton3.setText("Convidados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,24 +194,42 @@ public class Cadastro1 extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
+        jPanel3.setPreferredSize(new java.awt.Dimension(834, 419));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Professores");
+        jLabel2.setText("Atualizar");
 
-        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nome.setForeground(new java.awt.Color(51, 51, 51));
-        nome.setText("Nome");
-        nome.setToolTipText("");
-        nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nome.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(31, 142, 243));
+        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Atualizar");
+        jButton6.setBorder(null);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/seta-esquerda.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(249, 94, 104));
+        jButton7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Excluir");
+        jButton7.setBorder(null);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -176,23 +243,13 @@ public class Cadastro1 extends javax.swing.JFrame {
             }
         });
 
-        cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cpf.setForeground(new java.awt.Color(51, 51, 51));
-        cpf.setText("CPF");
-        cpf.setBorder(null);
-        cpf.addActionListener(new java.awt.event.ActionListener() {
+        funcao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        funcao.setForeground(new java.awt.Color(51, 51, 51));
+        funcao.setText("Função");
+        funcao.setBorder(null);
+        funcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
-            }
-        });
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setText("Horas");
-        horas.setBorder(null);
-        horas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horasActionPerformed(evt);
+                funcaoActionPerformed(evt);
             }
         });
 
@@ -206,6 +263,18 @@ public class Cadastro1 extends javax.swing.JFrame {
             }
         });
 
+        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nome.setForeground(new java.awt.Color(51, 51, 51));
+        nome.setText("Nome");
+        nome.setToolTipText("");
+        nome.setBorder(null);
+        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeActionPerformed(evt);
+            }
+        });
+
         endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         endereco.setForeground(new java.awt.Color(51, 51, 51));
         endereco.setText("Endereço");
@@ -213,24 +282,6 @@ public class Cadastro1 extends javax.swing.JFrame {
         endereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enderecoActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(22, 161, 78));
-        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Gravar");
-        jButton6.setBorder(null);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/seta-esquerda.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
             }
         });
 
@@ -246,24 +297,23 @@ public class Cadastro1 extends javax.swing.JFrame {
                         .addGap(324, 324, 324)
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(205, 205, 205)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
-                                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,21 +322,21 @@ public class Cadastro1 extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addGap(136, 136, 136)
+                .addGap(148, 148, 148)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -297,7 +347,7 @@ public class Cadastro1 extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -305,20 +355,20 @@ public class Cadastro1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
         );
 
         pack();
@@ -326,90 +376,153 @@ public class Cadastro1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
+        View.Professores.FiltroBuscaProf menu = new View.Professores.FiltroBuscaProf();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+        menuAluno.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+
+        Conexao conn = new Conexao();
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+
+        try {
+
+            conn.delete("funcionarios", this.getId_func());
+            JOptionPane.showMessageDialog(null, "Funcionario excluída com sucesso!");
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "Erro na exclusão!");
+        }
+
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+
+        System.out.println(nome.getText());
+
+        FuncionariosDao dao = new FuncionariosDao();
+
+        String salarioBusca = "0.00";
+
+        if (!salario.getText().equals("")) {
+
+            salarioBusca = salario.getText();
+
+        }
+        Funcionarios funcionario = new Funcionarios(funcao.getText(), Float.parseFloat(salarioBusca), nome.getText(), "", endereco.getText(), telefone.getText());
+
+        dao.updateFuncionario(funcionario, this.id_func);
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_salarioActionPerformed
 
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
+    private void funcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
-
-    private void horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_horasActionPerformed
+    }//GEN-LAST:event_funcaoActionPerformed
 
     private void telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneActionPerformed
 
+    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeActionPerformed
+
     private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enderecoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-        Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),14);
-        PessoasDao dao = new PessoasDao();
-        
-        try {
-            dao.addPessoa(pessoa);
-        } catch (Exception ex) {
-            Logger.getLogger(Cadastro1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-        
-        FiltroBuscaProf menu = new FiltroBuscaProf();
-        
+        View.Convidados.FiltroBuscaConvidados menu = new View.Convidados.FiltroBuscaConvidados();
         menu.setVisible(true);
         this.dispose();
-        
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro1().setVisible(true);
-                
-                
-                
+                new Atualizar1().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
+    private javax.swing.JTextField funcao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

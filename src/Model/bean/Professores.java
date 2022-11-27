@@ -8,7 +8,7 @@ public class Professores extends Pessoas{
     protected String horastrab;
     
     public Professores(String nome, String cpf, String endereco, String telefone, float salario, String horas_trab){
-        super(nome, cpf, endereco, telefone, 0);
+        super(nome, cpf, endereco, telefone);
         
         this.setSalario(salario);
         this.setHoras_trab(horas_trab);

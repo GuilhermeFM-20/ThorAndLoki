@@ -2,80 +2,97 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Professores;
+package View.Alunos;
 
-import Model.dao.PessoasDao;
+import Model.bean.Alunos;
+import  Model.dao.PessoasDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
-import Model.bean.Professores;
-import Model.dao.ProfessoresDao;
+import Model.dao.AlunosDao;
 import View.ThorAndLoki;
 import java.awt.Dimension;
+
 
 /**
  *
  * @author Guilherme Freire
  */
-public class FiltroBuscaProf extends javax.swing.JFrame {
-
-    ThorAndLoki mask = new ThorAndLoki();
+public class FiltroBuscaAlunos extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
-    public FiltroBuscaProf() {
+    
+    ThorAndLoki mask = new ThorAndLoki();
+    
+    public FiltroBuscaAlunos() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);   
         setPreferredSize(new Dimension(1251, 651));
         jPanel1.setPreferredSize(new Dimension(222, 639));
-
+        
         menu.addIcon(this);
-
+        
+        
+        
         this.loadTable();
-
+        
+        
+       
     }
-
-    public void loadTable() {
-
-        String salarioBusca = "0.00";
-
-        if (!salario.getText().equals("")) {
-
-            salarioBusca = salario.getText();
-
+    
+    public void loadTable(){
+        
+        
+        String idadeBusca = "0";
+        String multaBusca = "0.00";
+        
+        if(!idade1.getText().equals("")){
+            
+            idadeBusca = idade1.getText();
+            
         }
-
-        Professores professores = new Professores(nome.getText(), cpf.getText(), endereco.getText(), telefone1.getText(), Float.parseFloat(salarioBusca), horas.getText());
-        ProfessoresDao dao = new ProfessoresDao();
-        ResultSet rs = dao.loadSearch(professores);
-
+        
+        if(!multaatraso.getText().equals("")){
+            
+            multaBusca = multaatraso.getText();
+            
+        }
+        
+        Alunos aluno = new Alunos(nome1.getText(),cpf.getText(),endereco.getText(),telefone1.getText(),Integer.parseInt(idadeBusca),Mensalidade.getSelectedItem().toString(),Float.parseFloat(multaBusca));
+        AlunosDao dao = new AlunosDao();
+        ResultSet rs = dao.loadSearch(aluno);
+        
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
-
+        
         model.setNumRows(0);
-        try {
-
-            while (rs.next()) {
-
-                model.addRow(new Object[]{rs.getString("prof_id"),
-                     rs.getString("prof_nome"),
-                     mask.maskCpf(rs.getString("prof_cpf")),
-                     rs.getString("prof_salario"),
-                     mask.maskFone(rs.getString("prof_telefone")),
-                     rs.getString("prof_horas"),
-                     rs.getString("prof_endereco")});
+        try{
+            
+            while(rs.next()){
+                
+                
+                model.addRow(new Object[]{rs.getString("alun_id")
+                                          ,rs.getString("alun_nome")
+                                          ,mask.maskCpf(rs.getString("alun_cpf"))
+                                          ,rs.getString("alun_idade")
+                                          ,rs.getString("alun_mensalidade")
+                                          ,mask.maskFone(rs.getString("alun_telefone"))
+                                          ,rs.getString("alun_multa")
+                                          ,rs.getString("alun_endereco")});
 
             }
-
-        } catch (SQLException ex) {
-
+            
+        }catch(SQLException ex){
+            
             System.out.println("Erro na consulta dos dados" + ex);
-
+            
         }
-
+        
+        
     }
 
     /**
@@ -97,11 +114,8 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         telefone = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        salario = new javax.swing.JTextField();
+        multaatraso = new javax.swing.JTextField();
         cpf = new javax.swing.JTextField();
-        horas = new javax.swing.JTextField();
-        telefone1 = new javax.swing.JTextField();
         endereco = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -110,9 +124,14 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        idade1 = new javax.swing.JFormattedTextField();
+        nome1 = new javax.swing.JTextField();
+        telefone1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        Mensalidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -121,8 +140,10 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(7, 95, 133));
+        jPanel2.setPreferredSize(new java.awt.Dimension(816, 636));
 
         jPanel1.setBackground(new java.awt.Color(31, 142, 243));
+        jPanel1.setPreferredSize(new java.awt.Dimension(222, 639));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,56 +232,29 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Filtro de Busca");
 
-        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nome.setForeground(new java.awt.Color(51, 51, 51));
-        nome.setToolTipText("");
-        nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
-
-        salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        salario.setForeground(new java.awt.Color(51, 51, 51));
-        salario.setBorder(null);
-        salario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salarioActionPerformed(evt);
+        multaatraso.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        multaatraso.setForeground(new java.awt.Color(51, 51, 51));
+        multaatraso.setToolTipText("");
+        multaatraso.setBorder(null);
+        multaatraso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        multaatraso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                multaatrasoKeyReleased(evt);
             }
         });
 
         cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cpf.setForeground(new java.awt.Color(51, 51, 51));
         cpf.setBorder(null);
-        cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
+        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cpfKeyReleased(evt);
             }
         });
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setBorder(null);
-        horas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horasActionPerformed(evt);
-            }
-        });
-
-        telefone1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        telefone1.setForeground(new java.awt.Color(51, 51, 51));
-        telefone1.setBorder(null);
 
         endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         endereco.setForeground(new java.awt.Color(51, 51, 51));
         endereco.setBorder(null);
-        endereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoActionPerformed(evt);
-            }
-        });
 
         jButton5.setBackground(new java.awt.Color(31, 142, 243));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -301,7 +295,7 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
+                "Id", "Nome", "CPF", "Idade", "Mensalidade", "Telefone", "Multa", "Endereço"
             }
         ));
         tabelaPessoas.setFocusable(false);
@@ -320,110 +314,152 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
             tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
         }
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nome:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CPF:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Salário:");
+        jLabel6.setText("Idade:");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Telefone:");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Horas:");
+        jLabel8.setText("Mensalidade:");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Endereço:");
+        jLabel9.setText("Multa Por Atraso:");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Endereço:");
+
+        idade1.setBorder(null);
+        idade1.setForeground(new java.awt.Color(0, 0, 0));
+        idade1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+
+        nome1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nome1.setForeground(new java.awt.Color(51, 51, 51));
+        nome1.setToolTipText("");
+        nome1.setBorder(null);
+        nome1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nome1ActionPerformed(evt);
+            }
+        });
+
+        telefone1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        telefone1.setForeground(new java.awt.Color(51, 51, 51));
+        telefone1.setBorder(null);
+        telefone1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telefone1KeyReleased(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Telefone:");
+
+        Mensalidade.setBackground(new java.awt.Color(255, 255, 255));
+        Mensalidade.setForeground(new java.awt.Color(0, 0, 0));
+        Mensalidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Básico", "Médio", "Completo" }));
+        Mensalidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MensalidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout telefoneLayout = new javax.swing.GroupLayout(telefone);
         telefone.setLayout(telefoneLayout);
         telefoneLayout.setHorizontalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(telefoneLayout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(306, 306, 306))
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addGap(204, 204, 204)
-                                .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(telefoneLayout.createSequentialGroup()
-                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(idade1)))
                     .addGroup(telefoneLayout.createSequentialGroup()
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(telefone1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
+                            .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
                             .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(335, 335, 335))
         );
         telefoneLayout.setVerticalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(26, 26, 26)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(2, 2, 2)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(6, 6, 6)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idade1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(9, 9, 9)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -442,20 +478,20 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 629, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
         );
 
         pack();
@@ -463,77 +499,85 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        View.Professores.FiltroBuscaProf menu = new View.Professores.FiltroBuscaProf();
-        menu.setVisible(true);
-        this.dispose();
+    View.Professores.FiltroBuscaProf menu = new  View.Professores.FiltroBuscaProf();
+    menu.setVisible(true);
+    this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
-        menuAluno.setVisible(true);
-        this.dispose();
+    View.Alunos.FiltroBuscaAlunos menuAluno = new View.Alunos.FiltroBuscaAlunos();
+    menuAluno.setVisible(true);
+    this.dispose();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+    private void nome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
-    private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salarioActionPerformed
-
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
-
-    private void horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_horasActionPerformed
-
-    private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        this.loadTable();
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-
-        View.Professores.CadastroProf menu = new View.Professores.CadastroProf();
-        menu.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_nome1ActionPerformed
 
     private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
         // TODO add your handling code here:
 
         int linha = tabelaPessoas.getSelectedRow();
 
-        int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
+        int id_aluno = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
 
-        View.Professores.AtualizarProf menu = new View.Professores.AtualizarProf(id_pessoa);
+        View.Alunos.Atualizar1 menu = new View.Alunos.Atualizar1(id_aluno);
         menu.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_tabelaPessoasMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        View.Alunos.Cadastro1 menu = new View.Alunos.Cadastro1();
+        menu.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.loadTable();
+        
+        System.out.println( Mensalidade.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void cpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfKeyReleased
+        // TODO add your handling code here:
+        cpf.setText(mask.maskCpf(cpf.getText()));
+    }//GEN-LAST:event_cpfKeyReleased
+
+    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
+        // TODO add your handling code here:
+        if(multaatraso.getText().length() == 4){
+            multaatraso.setText(mask.maskHoras(multaatraso.getText()));
+        }
+    }//GEN-LAST:event_multaatrasoKeyReleased
+
+    private void telefone1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefone1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefone1KeyReleased
+
+    private void MensalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MensalidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MensalidadeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
-        menu.setVisible(true);
-        this.dispose();
+    View.Funcionarios.FiltroBusca1  menu = new  View.Funcionarios.FiltroBusca1();
+    menu.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        View.Convidados.FiltroBuscaConvidados menu = new View.Convidados.FiltroBuscaConvidados();
-        menu.setVisible(true);
-        this.dispose();
+    View.Convidados.FiltroBuscaConvidados  menu = new  View.Convidados.FiltroBuscaConvidados();
+    menu.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -553,14 +597,110 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -597,16 +737,19 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltroBuscaProf().setVisible(true);
-
+                new FiltroBuscaAlunos().setVisible(true);
+                
+                
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Mensalidade;
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
+    private javax.swing.JFormattedTextField idade1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -614,19 +757,20 @@ public class FiltroBuscaProf extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nome;
-    private javax.swing.JTextField salario;
+    private javax.swing.JTextField multaatraso;
+    private javax.swing.JTextField nome1;
     private javax.swing.JTable tabelaPessoas;
     private javax.swing.JPanel telefone;
     private javax.swing.JTextField telefone1;

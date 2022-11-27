@@ -4,7 +4,6 @@
  */
 package View.Convidados;
 
-import View.CadastroTeste.*;
 import Connection.Conexao;
 import Model.bean.Convidados;
 import Model.dao.ConvidadosDao;
@@ -17,64 +16,60 @@ import java.sql.ResultSet;
  * @author Guilherme Freire
  */
 public class Atualizar1 extends javax.swing.JFrame {
-    
+
     private int id_convidado;
     /**
      * Creates new form Home
      */
-    
+
     ThorAndLoki mask = new ThorAndLoki();
-    
+
     private Atualizar1() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public Atualizar1(int id_convidado) {
         initComponents();
-        
+
         ThorAndLoki menu = new ThorAndLoki();
-        
+
         setLocationRelativeTo(null);
-        
+
         menu.addIcon(this);
-        
+
         this.setId_convidado(id_convidado);
-        
+
         this.loadOnce(id_convidado);
-        
-        
-        
-        
+
     }
 
-    public int getId_convidado(){
+    public int getId_convidado() {
         return id_convidado;
     }
-    
-    public void setId_convidado(int id){
+
+    public void setId_convidado(int id) {
         this.id_convidado = id;
     }
-    
-    public void loadOnce(int id){
-        
+
+    public void loadOnce(int id) {
+
         Conexao conn = new Conexao();
-        
+
         ResultSet rs = conn.dataLoad("convidados", id);
-        
-        try{
-            
-            while(rs.next()){
+
+        try {
+
+            while (rs.next()) {
                 nome.setText(rs.getString("conv_nome"));
                 cpf.setText(rs.getString("conv_cpf"));
-                cpf.setText(rs.getString("conv_valor"));
+                valor.setText(rs.getString("conv_valor"));
             }
-        }catch(Exception ex){
-            
+        } catch (Exception ex) {
+
             System.out.println("Erro ao carregar os valores: " + ex);
-            
+
         }
-        
-        
+
     }
 
     /**
@@ -133,10 +128,20 @@ public class Atualizar1 extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Convidados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,7 +190,7 @@ public class Atualizar1 extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
@@ -310,7 +315,7 @@ public class Atualizar1 extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -342,7 +347,7 @@ public class Atualizar1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,10 +355,17 @@ public class Atualizar1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        View.Professores.FiltroBuscaProf menu = new View.Professores.FiltroBuscaProf();
+        menu.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+        menuAluno.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
@@ -366,12 +378,12 @@ public class Atualizar1 extends javax.swing.JFrame {
         Conexao conn = new Conexao();
         FiltroBuscaConvidados menu = new FiltroBuscaConvidados();
 
-        try{
+        try {
 
             conn.delete("convidados", this.getId_convidado());
             JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, "Erro na exclusão!");
         }
@@ -404,13 +416,27 @@ public class Atualizar1 extends javax.swing.JFrame {
 
         ConvidadosDao dao = new ConvidadosDao();
 
-        Convidados convidado = new Convidados(Float.parseFloat(valor.getText()),nome.getText(),cpf.getText());
+        Convidados convidado = new Convidados(Float.parseFloat(valor.getText()), nome.getText(), cpf.getText());
 
         dao.updateConvidado(convidado, this.id_convidado);
         menu.loadTable();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        View.Convidados.FiltroBuscaConvidados menu = new View.Convidados.FiltroBuscaConvidados();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,9 +470,7 @@ public class Atualizar1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Atualizar1().setVisible(true);
-                
-                
-                
+
             }
         });
     }

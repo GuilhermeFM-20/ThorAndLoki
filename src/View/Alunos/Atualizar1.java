@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.CadastroTeste;
+package View.Alunos;
+
 
 import Connection.Conexao;
+import Model.bean.Alunos;
 import Model.bean.Pessoas;
+import Model.dao.AlunosDao;
 import  Model.dao.PessoasDao;
-import View.Home;
 import View.ThorAndLoki;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,20 +20,20 @@ import java.sql.SQLException;
  *
  * @author Guilherme Freire
  */
-public class Atualizar extends javax.swing.JFrame {
+public class Atualizar1 extends javax.swing.JFrame {
     
-    private int id_pessoa;
+    private int id_aluno;
     /**
      * Creates new form Home
      */
     
     ThorAndLoki mask = new ThorAndLoki();
     
-    private Atualizar() {
+    private Atualizar1() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public Atualizar(int id_pessoa) {
+    public Atualizar1(int id_aluno) {
         initComponents();
         
         ThorAndLoki menu = new ThorAndLoki();
@@ -40,21 +42,21 @@ public class Atualizar extends javax.swing.JFrame {
         
         menu.addIcon(this);
         
-        this.setId_pessoa(id_pessoa);
+        this.setId_aluno(id_aluno);
         
-        this.loadOnce(id_pessoa);
+        this.loadOnce(id_aluno);
         
         
         
         
     }
 
-    public int getId_pessoa(){
-        return id_pessoa;
+    public int getId_aluno(){
+        return id_aluno;
     }
     
-    public void setId_pessoa(int id){
-        this.id_pessoa = id;
+    public void setId_aluno(int id){
+        this.id_aluno = id;
     }
     
     public void loadOnce(int id){
@@ -68,8 +70,11 @@ public class Atualizar extends javax.swing.JFrame {
             while(rs.next()){
                 nome.setText(rs.getString("alun_nome"));
                 cpf.setText(rs.getString("alun_cpf"));
+                idade.setText(rs.getString("alun_idade"));
                 telefone.setText(rs.getString("alun_telefone"));
                 endereco.setText(rs.getString("alun_endereco"));
+                multaatraso.setText(rs.getString("alun_multa"));
+                //mensalidade.setText(rs.getString("alun_mensalidade"));
             }
         }catch(Exception ex){
             
@@ -104,16 +109,18 @@ public class Atualizar extends javax.swing.JFrame {
         cpf = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        horas = new javax.swing.JTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
         telefone = new javax.swing.JTextField();
-        endereco = new javax.swing.JTextField();
+        endereco = new javax.swing.JFormattedTextField();
+        idade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        Mensalidade = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        multaatraso = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -129,11 +136,6 @@ public class Atualizar extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(" MENU");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
 
         jButton1.setBackground(new java.awt.Color(0, 169, 241));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,10 +149,20 @@ public class Atualizar extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Visitantes");
+        jButton3.setText("Convidados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,6 +182,12 @@ public class Atualizar extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,12 +195,6 @@ public class Atualizar extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +203,7 @@ public class Atualizar extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +211,7 @@ public class Atualizar extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
@@ -249,24 +261,10 @@ public class Atualizar extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Telefone:");
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setBorder(null);
-        horas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                horasKeyReleased(evt);
-            }
-        });
-
-        jFormattedTextField4.setBorder(null);
-        jFormattedTextField4.setForeground(new java.awt.Color(0, 0, 0));
-        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        jLabel8.setText("Idade:");
 
         telefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         telefone.setForeground(new java.awt.Color(51, 51, 51));
-        telefone.setToolTipText("");
         telefone.setBorder(null);
         telefone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -274,12 +272,17 @@ public class Atualizar extends javax.swing.JFrame {
             }
         });
 
-        endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        endereco.setForeground(new java.awt.Color(51, 51, 51));
         endereco.setBorder(null);
-        endereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoActionPerformed(evt);
+        endereco.setForeground(new java.awt.Color(0, 0, 0));
+        endereco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+
+        idade.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        idade.setForeground(new java.awt.Color(51, 51, 51));
+        idade.setToolTipText("");
+        idade.setBorder(null);
+        idade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                idadeKeyReleased(evt);
             }
         });
 
@@ -293,26 +296,50 @@ public class Atualizar extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Salário:");
+        jLabel7.setText("Endereço:");
 
         nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         nome.setForeground(new java.awt.Color(51, 51, 51));
         nome.setToolTipText("");
         nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeActionPerformed(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Endereço:");
-
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Horas:");
+        jLabel9.setText("Telefone:");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Mensalidade:");
+
+        Mensalidade.setBackground(new java.awt.Color(255, 255, 255));
+        Mensalidade.setForeground(new java.awt.Color(0, 0, 0));
+        Mensalidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Básico", "Médio", "Completo" }));
+        Mensalidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MensalidadeActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Multa Por Atraso:");
+
+        multaatraso.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        multaatraso.setForeground(new java.awt.Color(51, 51, 51));
+        multaatraso.setToolTipText("");
+        multaatraso.setBorder(null);
+        multaatraso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        multaatraso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                multaatrasoKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -331,7 +358,7 @@ public class Atualizar extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
+                        .addGap(135, 135, 135)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,17 +370,20 @@ public class Atualizar extends javax.swing.JFrame {
                                     .addComponent(jLabel6)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idade, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
-                                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(24, 24, 24)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                                    .addComponent(jLabel10)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
-                                    .addComponent(jFormattedTextField4))))))
-                .addContainerGap(164, Short.MAX_VALUE))
+                                    .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12)
+                                .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,8 +392,9 @@ public class Atualizar extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addGap(108, 108, 108)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(76, 76, 76)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -372,26 +403,31 @@ public class Atualizar extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel10))
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2))
+                    .addComponent(idade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -409,18 +445,17 @@ public class Atualizar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1103, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,37 +467,60 @@ public class Atualizar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        View.Professores.FiltroBuscaProf menu = new  View.Professores.FiltroBuscaProf();
+        menu.setVisible(true);
+        this.dispose();
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+        menuAluno.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+       View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
         
         System.out.println(nome.getText());
         
-        PessoasDao dao = new PessoasDao();
+        AlunosDao dao = new AlunosDao();
         
-        Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),14);
+        String idadeBusca = "0";
+        String multaBusca = "0.00";
         
-        dao.updatePessoa(pessoa, this.id_pessoa);
-        menu.loadTable();
-        menu.setVisible(true);
+        if(!idade.getText().equals("")){
+            
+            idadeBusca = idade.getText();
+            
+        }
+        
+        if(!multaatraso.getText().equals("")){
+            
+            multaBusca = multaatraso.getText();
+            
+        }
+        
+        Alunos aluno = new Alunos(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),Integer.parseInt(idadeBusca),Mensalidade.getSelectedItem().toString(),Float.parseFloat(multaBusca));
+        
+        dao.updateAluno(aluno, this.id_aluno);
+        menuAluno.loadTable();
+        menuAluno.setVisible(true);
         this.dispose();
-        
-        
+      
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         
-        FiltroBuscaProf menu = new FiltroBuscaProf();
-        menu.loadTable();
-        menu.setVisible(true);
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+        menuAluno.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -471,27 +529,21 @@ public class Atualizar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Conexao conn = new Conexao();
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+         View.Alunos.FiltroBuscaAlunos2 menu = new View.Alunos.FiltroBuscaAlunos2();
         
-        int verificacao = JOptionPane.showConfirmDialog(null, "Deseja excluir esse cliente?");
-        
-        if(verificacao == 0){
-        
-            try{
-
-                conn.delete("alunos", this.getId_pessoa());
-                JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
-
-            }catch(Exception ex){
-
-                JOptionPane.showMessageDialog(null, "Erro na exclusão!");
-            }
+        try{
             
-            menu.loadTable();
-            menu.setVisible(true);
-            this.dispose();
-        
+            conn.delete("alunos", this.getId_aluno());
+            JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
+            
+        }catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, "Erro na exclusão!");
         }
+        
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -500,36 +552,50 @@ public class Atualizar extends javax.swing.JFrame {
         cpf.setText(mask.maskCpf(cpf.getText()));
     }//GEN-LAST:event_cpfKeyReleased
 
-    private void horasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_horasKeyReleased
-        // TODO add your handling code here:
-        if(horas.getText().length() == 4){
-            horas.setText(mask.maskHoras(horas.getText()));
-        }
-    }//GEN-LAST:event_horasKeyReleased
-
     private void telefoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneKeyReleased
         // TODO add your handling code here:
-        telefone.setText(mask.maskFone(telefone.getText()));
+        if(telefone.getText().length() == 4){
+            telefone.setText(mask.maskHoras(telefone.getText()));
+        }
     }//GEN-LAST:event_telefoneKeyReleased
 
-    private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
+    private void idadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idadeKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoActionPerformed
+        idade.setText(mask.maskFone(idade.getText()));
+    }//GEN-LAST:event_idadeKeyReleased
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void MensalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MensalidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MensalidadeActionPerformed
+
+    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
+        // TODO add your handling code here:
+        if(multaatraso.getText().length() == 4){
+            multaatraso.setText(mask.maskHoras(multaatraso.getText()));
+        }
+    }//GEN-LAST:event_multaatrasoKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        View.Funcionarios.FiltroBusca1  menu = new  View.Funcionarios.FiltroBusca1();
+        menu.setVisible(true);
+        this.dispose();
+
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
-        Home menu = new Home();
-        
+        View.Convidados.FiltroBuscaConvidados  menu = new  View.Convidados.FiltroBuscaConvidados();
         menu.setVisible(true);
         this.dispose();
         
-        
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -548,14 +614,142 @@ public class Atualizar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Atualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Atualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Atualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Atualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -688,7 +882,7 @@ public class Atualizar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Atualizar().setVisible(true);
+                new Atualizar1().setVisible(true);
                 
                 
                 
@@ -697,18 +891,19 @@ public class Atualizar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Mensalidade;
     private javax.swing.JTextField cpf;
-    private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
+    private javax.swing.JFormattedTextField endereco;
+    private javax.swing.JTextField idade;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -720,6 +915,7 @@ public class Atualizar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField multaatraso;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables

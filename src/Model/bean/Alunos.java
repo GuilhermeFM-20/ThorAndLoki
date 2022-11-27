@@ -4,11 +4,12 @@ package Model.bean;
 public class Alunos extends Pessoas{
     
     private float mensalidade;
-    private float multaatraso;       
+    private float multaatraso;      
+    private int idade;
     
     public Alunos(String nome, String cpf, String endereco, String telefone, int idade,String  mensalidade, float multaatraso){
         
-        super(nome, cpf, endereco, telefone,idade);
+        super(nome, cpf, endereco, telefone);
         
         this.setMensalidade(mensalidade);
         this.setMultaAtraso(multaatraso);
@@ -18,6 +19,23 @@ public class Alunos extends Pessoas{
     public float getMensalidade() {
         return mensalidade; 
         
+    }
+    
+    
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        if(idade < 11){
+            
+           System.out.println("Idade inválida");
+            
+        }else{
+            
+            this.idade = idade;
+            
+        }
     }
     
     public void setMensalidade(String mensalidade) {

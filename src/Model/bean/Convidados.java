@@ -15,7 +15,7 @@ public class Convidados extends Pessoas{
     private float valor;
     
     public Convidados(float valor,String nome, String cpf ){
-        super(nome, cpf,"", "",0);
+        super(nome, cpf,"","");
         
         this.setValor(valor);
         

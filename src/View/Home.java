@@ -4,17 +4,16 @@
  */
 package View;
 
+import View.Alunos.FiltroBuscaAlunos2;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Guilherme Freire
  */
 public class Home extends javax.swing.JFrame {
-    
-    
 
     /**
      * Creates new form Home
@@ -24,7 +23,7 @@ public class Home extends javax.swing.JFrame {
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
         menu.addIcon(this);
-        
+
     }
 
     /**
@@ -50,7 +49,6 @@ public class Home extends javax.swing.JFrame {
         setBackground(new java.awt.Color(7, 95, 133));
         setIconImages(null);
         setLocation(new java.awt.Point(250, 100));
-        setPreferredSize(new java.awt.Dimension(1110, 702));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(7, 95, 133));
@@ -74,10 +72,15 @@ public class Home extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Convidados");
+        jButton3.setText("Visitantes");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -143,7 +146,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(111, 111, 111))
         );
@@ -176,25 +179,35 @@ public class Home extends javax.swing.JFrame {
 
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
-        
-        View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();        
-        menuCadastro.setVisible(true);
+
+        View.Professores.FiltroBuscaProf menu = new View.Professores.FiltroBuscaProf();
+        menu.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnProfessoresActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+
+        menuAluno.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-        
-        View.Convidados.FiltroBuscaConvidados menuCadastro = new View.Convidados.FiltroBuscaConvidados();
-        menuCadastro.setVisible(true);
+        View.Convidados.FiltroBuscaConvidados menu = new View.Convidados.FiltroBuscaConvidados();
+        menu.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -228,9 +241,7 @@ public class Home extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
-                
-                
-                
+
             }
         });
     }

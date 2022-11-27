@@ -4,14 +4,13 @@
  */
 package View.Convidados;
 
-import View.CadastroTeste.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Convidados;
 import Model.dao.ConvidadosDao;
 import View.ThorAndLoki;
-
+import java.awt.Dimension;
 
 /**
  *
@@ -22,61 +21,55 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    
     ThorAndLoki mask = new ThorAndLoki();
-    
+
     public FiltroBuscaConvidados() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
-        
+        setPreferredSize(new Dimension(1251, 651));
+        jPanel1.setPreferredSize(new Dimension(222, 639));
+
         menu.addIcon(this);
-        
-        
-        
+
         this.loadTable();
-        
-        
-       
+
     }
-    
-    public void loadTable(){
-        
+
+    public void loadTable() {
+
         String valorBusca = "0.00";
-        
-        if(!valor.getText().equals("")){
-          
+
+        if (!valor.getText().equals("")) {
+
             valorBusca = valor.getText();
-            
+
         }
-        
-        
-        Convidados convidado = new Convidados(Float.parseFloat(valorBusca),nome.getText(),cpf.getText());
+
+        Convidados convidado = new Convidados(Float.parseFloat(valorBusca), nome.getText(), cpf.getText());
         ConvidadosDao dao = new ConvidadosDao();
         ResultSet rs = dao.loadSearch(convidado);
-        
+
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
-        
+
         model.setNumRows(0);
-        try{
-            
-            while(rs.next()){
-                
-                
-                model.addRow(new Object[]{rs.getString("conv_id")
-                                          ,rs.getString("conv_nome")
-                                          ,mask.maskCpf(rs.getString("conv_cpf"))
-                                          ,rs.getString("conv_valor")});
+        try {
+
+            while (rs.next()) {
+
+                model.addRow(new Object[]{rs.getString("conv_id"),
+                     rs.getString("conv_nome"),
+                     mask.maskCpf(rs.getString("conv_cpf")),
+                     rs.getString("conv_valor")});
 
             }
-            
-        }catch(SQLException ex){
-            
+
+        } catch (SQLException ex) {
+
             System.out.println("Erro na consulta dos dados" + ex);
-            
+
         }
-        
-        
+
     }
 
     /**
@@ -137,10 +130,20 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Convidados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,14 +192,14 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
 
         telefone.setBackground(new java.awt.Color(31, 167, 243));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro");
+        jLabel2.setText("Filtro de Busca");
 
         cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cpf.setForeground(new java.awt.Color(51, 51, 51));
@@ -246,7 +249,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
+                "Id", "Nome", "CPF", "Valor"
             }
         ));
         tabelaPessoas.setFocusable(false);
@@ -261,7 +264,6 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaPessoas);
         if (tabelaPessoas.getColumnModel().getColumnCount() > 0) {
-            tabelaPessoas.getColumnModel().getColumn(0).setResizable(false);
             tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
         }
 
@@ -301,30 +303,29 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
         telefoneLayout.setHorizontalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(jLabel2))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(valor, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))))
+                            .addComponent(jLabel4)
+                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(valor, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(telefoneLayout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(telefoneLayout.createSequentialGroup()
@@ -352,7 +353,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(telefoneLayout.createSequentialGroup()
@@ -370,16 +371,16 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,10 +399,16 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        View.Professores.FiltroBuscaProf menu = new View.Professores.FiltroBuscaProf();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        View.Alunos.FiltroBuscaAlunos2 menuAluno = new View.Alunos.FiltroBuscaAlunos2();
+        menuAluno.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
@@ -411,7 +418,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
         int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
 
-        Atualizar menu = new Atualizar(id_pessoa);
+        View.Convidados.Atualizar1 menu = new View.Convidados.Atualizar1(id_pessoa);
         menu.setVisible(true);
         this.dispose();
 
@@ -420,7 +427,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        Cadastro menu = new Cadastro();
+        View.Convidados.Cadastro1 menu = new View.Convidados.Cadastro1();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -440,6 +447,20 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        View.Convidados.FiltroBuscaConvidados menu = new View.Convidados.FiltroBuscaConvidados();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -535,9 +556,7 @@ public class FiltroBuscaConvidados extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FiltroBuscaConvidados().setVisible(true);
-                
-                
-                
+
             }
         });
     }

@@ -14,8 +14,8 @@ public class Funcionarios extends Pessoas{
     private float salario;
     private String funcao;
     
-    public Funcionarios(String funcao, float salario, String nome, String cpf, String endereco, String telefone, int idade){
-        super(nome, cpf, endereco, telefone,idade);
+    public Funcionarios(String funcao, float salario, String nome, String cpf, String endereco, String telefone){
+        super(nome, cpf, endereco, telefone);
         
         this.setSalario(salario);
         this.setFuncao(funcao);
@@ -27,18 +27,16 @@ public class Funcionarios extends Pessoas{
 
 
     public void setSalario(float salario) {
-        if (salario > 0){
+        
             this.salario = salario;
-        }else{
-            JOptionPane.showMessageDialog(null, "Salário inválido");
-        }
+        
     }
     
     public String getFuncao(){
         return funcao;
 }
     
-    public void setFuncao(String Funcao){
+    public void setFuncao(String funcao){
         this.funcao = funcao;
 }
     

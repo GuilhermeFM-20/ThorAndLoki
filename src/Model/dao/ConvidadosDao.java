@@ -118,7 +118,7 @@ public class ConvidadosDao {
         
         try{
             
-            conn.query("UPDATE convidados SET conv_nome = '"+ convidado.getNome() +"', conv_cpf =  '"+convidado.getCpf()+"', conv_endereco = '"+ convidado.getValor() +",on");
+            conn.query("UPDATE convidados SET conv_nome = '"+ convidado.getNome() +"', conv_cpf =  '"+convidado.getCpf()+"', conv_valor = '"+ convidado.getValor() +"' WHERE conv_id = " + id);
             JOptionPane.showMessageDialog(null, "Convidado atualizado com sucesso!");
             
         }catch(Exception ex){

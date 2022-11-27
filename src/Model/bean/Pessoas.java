@@ -15,13 +15,12 @@ package Model.bean;
     protected String endereco;
     protected String telefone;
     
-    public Pessoas(String nome, String cpf, String endereco, String telefone, int idade){
+    public Pessoas(String nome, String cpf, String endereco, String telefone){
         
         this.setNome(nome);
         this.setCpf(cpf);
         this.setEndereco(endereco);
         this.setTelefone(telefone);
-        //this.setIdade(idade);
         
     }
 
