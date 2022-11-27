@@ -74,6 +74,11 @@ public class Home extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 169, 241));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Funcionários");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,12 +182,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-<<<<<<< HEAD
-        View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();
-        
-=======
         View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();        
->>>>>>> c5d26cb619c1fc44be98135371d8c1d2b745f07d
         menuCadastro.setVisible(true);
         this.dispose();
         
@@ -192,6 +192,14 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+<<<<<<< HEAD
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        View.Funcionarios.FiltroBusca1  menuCadastro = new View.Funcionarios.FiltroBusca1 ();
+        
+        menuCadastro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+=======
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
@@ -201,6 +209,7 @@ public class Home extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+>>>>>>> a5e1034390c78963b32f537729bf8e495a4fb84f
 
     /**
      * @param args the command line arguments
