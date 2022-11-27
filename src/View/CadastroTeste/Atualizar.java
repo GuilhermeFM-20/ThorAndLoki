@@ -441,7 +441,7 @@ public class Atualizar extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+        FiltroBusca menu = new FiltroBusca();
         
         System.out.println(nome.getText());
         
@@ -460,7 +460,7 @@ public class Atualizar extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+        FiltroBusca menu = new FiltroBusca();
         menu.loadTable();
         menu.setVisible(true);
         this.dispose();
@@ -471,7 +471,7 @@ public class Atualizar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Conexao conn = new Conexao();
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+        FiltroBusca menu = new FiltroBusca();
         
         int verificacao = JOptionPane.showConfirmDialog(null, "Deseja excluir esse cliente?");
         
