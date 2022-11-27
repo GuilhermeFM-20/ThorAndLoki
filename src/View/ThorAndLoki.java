@@ -89,8 +89,5 @@ public class ThorAndLoki{
         
     }
     
-<<<<<<< HEAD
-=======
     
->>>>>>> c5d26cb619c1fc44be98135371d8c1d2b745f07d
 }
