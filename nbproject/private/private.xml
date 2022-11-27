@@ -4,6 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ThorAndLoki/src/View/Professores/Cadastro1.java</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ThorAndLoki/src/Model/bean/Funcionarios.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/C:/Users/kleyb/OneDrive/Documentos/NetBeansProjects/ThorAndLoki/src/Model/bean/Professores.java</file>
             <file>file:/C:/Users/kleyb/OneDrive/Documentos/NetBeansProjects/ThorAndLoki/src/Model/bean/Pessoas.java</file>
             <file>file:/C:/Users/kleyb/OneDrive/Documentos/NetBeansProjects/ThorAndLoki/src/Connection/Conexao.java</file>
@@ -45,6 +49,7 @@
             <file>file:/C:/Users/Guilherme%20Freire/Documents/NetBeansProjects/ThorAndLoki/src/View/ThorAndLoki.java</file>
 >>>>>>> b3c9fac38272609cf4bf858fed239499dc66dd30
 >>>>>>> b75af1a3c9d695dfb7254bdd8411f0f58614654e
+>>>>>>> a5e1034390c78963b32f537729bf8e495a4fb84f
         </group>
     </open-files>
 </project-private>
