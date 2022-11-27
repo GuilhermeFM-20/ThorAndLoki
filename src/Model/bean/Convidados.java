@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author kleyb
  */
-public class Visitantes extends Pessoas{ 
+public class Convidados extends Pessoas{ 
     
     private float valor;
     
-    public Visitantes(float valor,String nome, String cpf, String endereco, String telefone, int idade){
-        super(nome, cpf, endereco, telefone,idade);
+    public Convidados(float valor,String nome, String cpf ){
+        super(nome, cpf,"", "",0);
         
         this.setValor(valor);
         
@@ -26,13 +26,9 @@ public class Visitantes extends Pessoas{
     }
     
     public void setValor(float valor){
-    if (valor > 0){
-            this.valor = valor;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Valor inválido.");
-        }
     
+            this.valor = valor;
+        
     }
     
     

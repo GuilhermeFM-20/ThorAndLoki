@@ -4,7 +4,6 @@
  */
 package View;
 
-import View.Professores.FiltroBuscaProf;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -83,7 +82,12 @@ public class Home extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Visitantes");
+        jButton3.setText("Convidados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,8 +182,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        FiltroBuscaProf  menuCadastro = new FiltroBuscaProf();
-        
+        View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();        
         menuCadastro.setVisible(true);
         this.dispose();
         
@@ -189,12 +192,24 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+<<<<<<< HEAD
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         View.Funcionarios.FiltroBusca1  menuCadastro = new View.Funcionarios.FiltroBusca1 ();
         
         menuCadastro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+=======
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        View.Convidados.FiltroBuscaConvidados menuCadastro = new View.Convidados.FiltroBuscaConvidados();
+        menuCadastro.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+>>>>>>> a5e1034390c78963b32f537729bf8e495a4fb84f
 
     /**
      * @param args the command line arguments
