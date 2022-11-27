@@ -4,6 +4,7 @@
  */
 package View.Funcionarios;
 
+import Model.bean.Funcionarios;
 import View.CadastroTeste.*;
 import  Model.dao.PessoasDao;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
+import Model.dao.FuncionariosDao;
 import View.ThorAndLoki;
 
 /**
@@ -22,6 +24,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    ThorAndLoki mask = new ThorAndLoki();
     public FiltroBusca1() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
@@ -39,12 +42,18 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     
     public void loadTable(){
         
+        String salarioBusca = "0.00";
         
-        Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(),14);
-        PessoasDao dao = new PessoasDao();
-        ResultSet rs = dao.loadSearch(pessoa);
+        if(!salario.getText().equals("")){
+          
+            salarioBusca = salario.getText();
+            
+        }
+        Funcionarios funcionario = new Funcionarios(funcao.getText(),Float.parseFloat(salarioBusca),nome.getText(),"",endereco.getText(),telefone1.getText(),14);
+        FuncionariosDao dao = new FuncionariosDao();
+        ResultSet rs = dao.loadSearch(funcionario);
         
-        DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
+        DefaultTableModel model = (DefaultTableModel) tabelaFuncionarios.getModel();
         
         model.setNumRows(0);
         try{
@@ -52,12 +61,12 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("alun_id")
-                                          ,rs.getString("alun_nome")
-                                          ,rs.getString("alun_cpf")
-                                          ,rs.getString("alun_idade")
-                                          ,rs.getString("alun_endereco")
-                                          ,rs.getString("alun_telefone")});
+                model.addRow(new Object[]{rs.getString("func_id")
+                                          ,rs.getString("func_nome")
+                                          ,rs.getString("func_salario")
+                                          ,rs.getString("func_funcao")
+                                          ,rs.getString("func_endereco")
+                                          ,rs.getString("func_telefone")});
 
             }
             
@@ -89,15 +98,20 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         telefone = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        salario = new javax.swing.JFormattedTextField();
+        funcao = new javax.swing.JTextField();
         nome = new javax.swing.JTextField();
-        salario = new javax.swing.JTextField();
-        cpf = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         telefone1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         endereco = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoas = new javax.swing.JTable();
+        tabelaFuncionarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -177,7 +191,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         telefone.setBackground(new java.awt.Color(31, 167, 243));
@@ -186,9 +200,31 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cadastro");
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Função:");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Salário:");
+
+        salario.setBorder(null);
+        salario.setForeground(new java.awt.Color(0, 0, 0));
+        salario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+
+        funcao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        funcao.setForeground(new java.awt.Color(51, 51, 51));
+        funcao.setToolTipText("");
+        funcao.setBorder(null);
+        funcao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        funcao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                funcaoKeyReleased(evt);
+            }
+        });
+
         nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         nome.setForeground(new java.awt.Color(51, 51, 51));
-        nome.setText("Nome");
         nome.setToolTipText("");
         nome.setBorder(null);
         nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -198,40 +234,30 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             }
         });
 
-        salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        salario.setForeground(new java.awt.Color(51, 51, 51));
-        salario.setText("Salário");
-        salario.setBorder(null);
-        salario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salarioActionPerformed(evt);
-            }
-        });
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nome:");
 
-        cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cpf.setForeground(new java.awt.Color(51, 51, 51));
-        cpf.setText("Função");
-        cpf.setBorder(null);
-        cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Telefone:");
 
         telefone1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         telefone1.setForeground(new java.awt.Color(51, 51, 51));
-        telefone1.setText("Telefone");
         telefone1.setBorder(null);
+        telefone1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telefone1KeyReleased(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Endereço:");
 
         endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         endereco.setForeground(new java.awt.Color(51, 51, 51));
-        endereco.setText("Endereço");
         endereco.setBorder(null);
-        endereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoActionPerformed(evt);
-            }
-        });
 
         jButton5.setBackground(new java.awt.Color(31, 142, 243));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -255,7 +281,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             }
         });
 
-        tabelaPessoas = new javax.swing.JTable(){
+        tabelaFuncionarios = new javax.swing.JTable(){
 
             public boolean isCellEditable(int rowIndex, int colIndex){
 
@@ -264,83 +290,100 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             }
 
         };
-        tabelaPessoas.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaPessoas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        tabelaPessoas.setForeground(new java.awt.Color(0, 0, 0));
-        tabelaPessoas.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFuncionarios.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaFuncionarios.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        tabelaFuncionarios.setForeground(new java.awt.Color(0, 0, 0));
+        tabelaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome", "Salário", "Função", "Telefone", "Endereço"
+                "Id", "Nome", "Salário", "Função", "Endereço", "Telefone"
             }
         ));
-        tabelaPessoas.setFocusable(false);
-        tabelaPessoas.setGridColor(new java.awt.Color(0, 51, 51));
-        tabelaPessoas.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        tabelaPessoas.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tabelaPessoas.getTableHeader().setReorderingAllowed(false);
-        tabelaPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaFuncionarios.setFocusable(false);
+        tabelaFuncionarios.setGridColor(new java.awt.Color(0, 51, 51));
+        tabelaFuncionarios.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        tabelaFuncionarios.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabelaFuncionarios.getTableHeader().setReorderingAllowed(false);
+        tabelaFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoasMouseClicked(evt);
+                tabelaFuncionariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoas);
-        if (tabelaPessoas.getColumnModel().getColumnCount() > 0) {
-            tabelaPessoas.getColumnModel().getColumn(0).setResizable(false);
-            tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
-        }
+        jScrollPane1.setViewportView(tabelaFuncionarios);
 
         javax.swing.GroupLayout telefoneLayout = new javax.swing.GroupLayout(telefone);
         telefone.setLayout(telefoneLayout);
         telefoneLayout.setHorizontalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
+                .addGap(370, 370, 370)
+                .addComponent(jLabel2)
+                .addContainerGap(395, Short.MAX_VALUE))
+            .addGroup(telefoneLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addGap(370, 370, 370)
-                        .addComponent(jLabel2))
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(salario, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)))
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(274, 274, 274)
-                                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(telefoneLayout.createSequentialGroup()
-                                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(telefoneLayout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addGroup(telefoneLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(214, 214, 214)
+                                .addComponent(jLabel10)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(telefoneLayout.createSequentialGroup()
+                        .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(endereco)))
+                .addContainerGap())
         );
         telefoneLayout.setVerticalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9))
+                .addGap(6, 6, 6)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -361,7 +404,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -386,49 +429,46 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void funcaoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_funcaoKeyReleased
+        // TODO add your handling code here:
+        if(funcao.getText().length() == 4){
+            funcao.setText(mask.maskHoras(funcao.getText()));
+        }
+    }//GEN-LAST:event_funcaoKeyReleased
+
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
 
-    private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
+    private void telefone1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefone1KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_salarioActionPerformed
-
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
-
-    private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoActionPerformed
+        telefone1.setText(mask.maskFone(telefone1.getText()));
+    }//GEN-LAST:event_telefone1KeyReleased
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         this.loadTable();
-        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        Cadastro menu = new Cadastro();
+        View.Funcionarios.Cadastro1 menu = new View.Funcionarios.Cadastro1();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
+    private void tabelaFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFuncionariosMouseClicked
         // TODO add your handling code here:
-        
-        int linha = tabelaPessoas.getSelectedRow();
-        
-        int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
-        
-        
-        Atualizar menu = new Atualizar(id_pessoa);
+
+        int linha = tabelaFuncionarios.getSelectedRow();
+
+        int id_func = Integer.parseInt(tabelaFuncionarios.getModel().getValueAt(linha, 0).toString());
+
+        View.Funcionarios.Atualizar1 menu = new View.Funcionarios.Atualizar1(id_func);
         menu.setVisible(true);
         this.dispose();
-        
-    }//GEN-LAST:event_tabelaPessoasMouseClicked
+    }//GEN-LAST:event_tabelaFuncionariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -484,8 +524,8 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
+    private javax.swing.JTextField funcao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -493,14 +533,19 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nome;
-    private javax.swing.JTextField salario;
-    private javax.swing.JTable tabelaPessoas;
+    private javax.swing.JFormattedTextField salario;
+    private javax.swing.JTable tabelaFuncionarios;
     private javax.swing.JPanel telefone;
     private javax.swing.JTextField telefone1;
     // End of variables declaration//GEN-END:variables
