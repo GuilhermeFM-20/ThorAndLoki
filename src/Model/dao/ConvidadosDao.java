@@ -98,7 +98,7 @@ public class ConvidadosDao {
         
             try{
             
-                conn.query("INSERT INTO convidados VALUES (DEFAULT,'"+ convidado.getNome() +"','"+convidado.getCpf()+"','"+ convidado.getValor() +",on)");
+                conn.query("INSERT INTO convidados VALUES (DEFAULT,'"+ convidado.getNome() +"','"+convidado.getCpf()+"',"+ convidado.getValor() +",'on')");
                 JOptionPane.showMessageDialog(null, "Convidado cadastrado com sucesso!");
             
             }catch(Exception ex){
