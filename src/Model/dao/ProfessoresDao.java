@@ -49,17 +49,30 @@ public class ProfessoresDao {
         }
         if (!professores.getTelefone().equals("Telefone") && !professores.getTelefone().equals("")){
         
+<<<<<<< HEAD
             addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "%'";
             
         }
         if (professores.getSalario() != 0.00){
         
             addQuery += "AND prof_salario = " + professores.getSalario();
+=======
+            addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "'%";
+        }    
+            
+        if (professores.getSalario() != 0.00){
+        
+            addQuery += "AND prof_salario = '" + professores.getSalario();
+>>>>>>> c5d26cb619c1fc44be98135371d8c1d2b745f07d
         
         }
         if (!professores.getHoras_trab().equals("Horas") && !professores.getHoras_trab().equals("")){
         
+<<<<<<< HEAD
             addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "%'";
+=======
+            addQuery += "AND prof_horas LIKE '%" + professores.getHoras_trab() + "'%";
+>>>>>>> c5d26cb619c1fc44be98135371d8c1d2b745f07d
         
         }
         
@@ -68,8 +81,8 @@ public class ProfessoresDao {
         return rs;
     
     }
-    
-    public void addProfessores(Professores professores) throws Exception{
+   
+    public void addProfessores(Professores professores){
             
             
         
@@ -97,6 +110,10 @@ public class ProfessoresDao {
             erro += "Digite as horas de trabalho, ";
                 
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5d26cb619c1fc44be98135371d8c1d2b745f07d
         if (professores.getSalario() <= 0.00){
             erro += "Digite o salário, ";
 
@@ -122,7 +139,7 @@ public class ProfessoresDao {
             
             
         }
-        
+               
             
     }
     
