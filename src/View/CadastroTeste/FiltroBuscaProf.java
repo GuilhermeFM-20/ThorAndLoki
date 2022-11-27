@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.bean.Pessoas;
-import Model.bean.Professores;
 import View.Home;
 import View.ThorAndLoki;
 
@@ -19,7 +18,7 @@ import View.ThorAndLoki;
  *
  * @author Guilherme Freire
  */
-public class FiltroBusca extends javax.swing.JFrame {
+public class FiltroBuscaProf extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
@@ -27,7 +26,7 @@ public class FiltroBusca extends javax.swing.JFrame {
     
     ThorAndLoki mask = new ThorAndLoki();
     
-    public FiltroBusca() {
+    public FiltroBuscaProf() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
@@ -45,9 +44,9 @@ public class FiltroBusca extends javax.swing.JFrame {
     public void loadTable(){
         
         
-        Professores professor = new Professores(nome1.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), salario.getText(),horas.getText());
+        Pessoas pessoa = new Pessoas(horas.getText(),cpf.getText(),endereco.getText(),telefone1.getText(),14);
         PessoasDao dao = new PessoasDao();
-        ResultSet rs = dao.loadSearch(professor);
+        ResultSet rs = dao.loadSearch(pessoa);
         
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
         
@@ -57,14 +56,13 @@ public class FiltroBusca extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("prof_id")
-                                          ,rs.getString("prof_nome")
-                                          ,mask.maskCpf(rs.getString("prof_cpf"))
-                                          ,rs.getSalario("prof_salario").toString()
-                                          ,rs.getString("prof_idade")
-                                          ,mask.maskFone(rs.getString("prof_telefone"))
+                model.addRow(new Object[]{rs.getString("alun_id")
+                                          ,rs.getString("alun_nome")
+                                          ,mask.maskCpf(rs.getString("alun_cpf"))
+                                          ,rs.getString("alun_idade")
+                                          ,mask.maskFone(rs.getString("alun_telefone"))
                                           ,""
-                                          ,rs.getString("prof_endereco")});
+                                          ,rs.getString("alun_endereco")});
 
             }
             
@@ -110,7 +108,7 @@ public class FiltroBusca extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Salario = new javax.swing.JFormattedTextField();
+        jFormattedTextField4 = new javax.swing.JFormattedTextField();
         nome1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -322,15 +320,15 @@ public class FiltroBusca extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Endereço:");
 
-        Salario.setBorder(null);
-        Salario.setForeground(new java.awt.Color(0, 0, 0));
-        Salario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+        jFormattedTextField4.setBorder(null);
+        jFormattedTextField4.setForeground(new java.awt.Color(0, 0, 0));
+        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
 
         nome1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         nome1.setForeground(new java.awt.Color(51, 51, 51));
         nome1.setToolTipText("");
         nome1.setBorder(null);
-        nome1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nome1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nome1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nome1ActionPerformed(evt);
@@ -365,7 +363,7 @@ public class FiltroBusca extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(Salario)))
+                                    .addComponent(jFormattedTextField4)))
                             .addGroup(telefoneLayout.createSequentialGroup()
                                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,7 +391,7 @@ public class FiltroBusca extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -534,30 +532,14 @@ public class FiltroBusca extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -578,7 +560,7 @@ public class FiltroBusca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltroBusca().setVisible(true);
+                new FiltroBuscaProf().setVisible(true);
                 
                 
                 
@@ -587,7 +569,6 @@ public class FiltroBusca extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField Salario;
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
     private javax.swing.JTextField horas;
@@ -597,6 +578,7 @@ public class FiltroBusca extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
