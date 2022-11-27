@@ -4,6 +4,7 @@
  */
 package View;
 
+import View.Alunos.FiltroBuscaAlunos;
 import View.CadastroTeste.FiltroBusca;
 import javax.swing.JOptionPane;
 
@@ -180,6 +181,12 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        
+       View.Alunos.FiltroBuscaAlunos menuAluno = new View.Alunos.FiltroBuscaAlunos();
+        
+        menuAluno.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
