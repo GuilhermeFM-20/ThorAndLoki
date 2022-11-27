@@ -173,7 +173,7 @@ public class Home extends javax.swing.JFrame {
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
         
-        FiltroBuscaProf  menuCadastro = new FiltroBuscaProf();
+        View.Professores.FiltroBuscaProf  menuCadastro = new View.Professores.FiltroBuscaProf();
         
         menuCadastro.setVisible(true);
         this.dispose();
