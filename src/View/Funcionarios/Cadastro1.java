@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.CadastroTeste;
+package View.Funcionarios;
 
+import Model.bean.Funcionarios;
+import View.CadastroTeste.*;
 import Model.bean.Pessoas;
+import Model.dao.FuncionariosDao;
 import  Model.dao.PessoasDao;
-import View.Home;
 import View.ThorAndLoki;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,15 +21,12 @@ import java.util.logging.Logger;
  *
  * @author Guilherme Freire
  */
-public class Cadastro extends javax.swing.JFrame {
+public class Cadastro1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
-    
-    ThorAndLoki mask = new ThorAndLoki();
-    
-    public Cadastro() {
+    public Cadastro1() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
@@ -56,19 +55,12 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
-        cpf = new javax.swing.JTextField();
+        salario = new javax.swing.JTextField();
+        funcao = new javax.swing.JTextField();
         telefone = new javax.swing.JTextField();
-        horas = new javax.swing.JTextField();
         endereco = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -84,11 +76,6 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(" MENU");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
 
         jButton1.setBackground(new java.awt.Color(0, 169, 241));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,7 +141,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
@@ -165,6 +152,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         nome.setForeground(new java.awt.Color(51, 51, 51));
+        nome.setText("Nome");
         nome.setToolTipText("");
         nome.setBorder(null);
         nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -174,41 +162,39 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cpf.setForeground(new java.awt.Color(51, 51, 51));
-        cpf.setBorder(null);
-        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                cpfKeyReleased(evt);
+        salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        salario.setForeground(new java.awt.Color(51, 51, 51));
+        salario.setText("Salário");
+        salario.setBorder(null);
+        salario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salarioActionPerformed(evt);
+            }
+        });
+
+        funcao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        funcao.setForeground(new java.awt.Color(51, 51, 51));
+        funcao.setText("Função");
+        funcao.setBorder(null);
+        funcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                funcaoActionPerformed(evt);
             }
         });
 
         telefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         telefone.setForeground(new java.awt.Color(51, 51, 51));
-        telefone.setToolTipText("");
+        telefone.setText("Telefone");
         telefone.setBorder(null);
-        telefone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                telefoneKeyReleased(evt);
-            }
-        });
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setBorder(null);
-        horas.addActionListener(new java.awt.event.ActionListener() {
+        telefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horasActionPerformed(evt);
-            }
-        });
-        horas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                horasKeyReleased(evt);
+                telefoneActionPerformed(evt);
             }
         });
 
         endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         endereco.setForeground(new java.awt.Color(51, 51, 51));
+        endereco.setText("Endereço");
         endereco.setBorder(null);
         endereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,34 +220,6 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Nome:");
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CPF:");
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Salário:");
-
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Endereço:");
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Horas:");
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Telefone:");
-
-        jFormattedTextField4.setBorder(null);
-        jFormattedTextField4.setForeground(new java.awt.Color(0, 0, 0));
-        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -274,32 +232,21 @@ public class Cadastro extends javax.swing.JFrame {
                         .addGap(324, 324, 324)
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jFormattedTextField4)))))
+                        .addGap(333, 333, 333)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                        .addGap(133, 133, 133)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(endereco))))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,34 +255,19 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addGap(110, 110, 110)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel10))
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(136, 136, 136)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -367,7 +299,7 @@ public class Cadastro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
         );
 
         pack();
@@ -385,9 +317,17 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
 
-    private void horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasActionPerformed
+    private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_horasActionPerformed
+    }//GEN-LAST:event_salarioActionPerformed
+
+    private void funcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_funcaoActionPerformed
+
+    private void telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneActionPerformed
 
     private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
         // TODO add your handling code here:
@@ -396,13 +336,21 @@ public class Cadastro extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),14);
-        PessoasDao dao = new PessoasDao();
+        String salarioBusca = "0.00";
+        
+        if(!salario.getText().equals("")){
+          
+            salarioBusca = salario.getText();
+            
+        }
+        Funcionarios funcionario = new Funcionarios(funcao.getText(),Float.parseFloat(salarioBusca),nome.getText(),"",endereco.getText(),telefone.getText(),14);
+        
+        FuncionariosDao dao = new FuncionariosDao();
         
         try {
-            dao.addPessoa(pessoa);
+            dao.addFuncionarios(funcionario);
         } catch (Exception ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Cadastro1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -410,40 +358,12 @@ public class Cadastro extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         
-        FiltroBuscaProf menu = new FiltroBuscaProf();
+        View.Funcionarios.FiltroBusca1 menu = new View.Funcionarios.FiltroBusca1();
         
         menu.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void cpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfKeyReleased
-        // TODO add your handling code here:
-         cpf.setText(mask.maskCpf(cpf.getText()));
-    }//GEN-LAST:event_cpfKeyReleased
-
-    private void telefoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneKeyReleased
-        // TODO add your handling code here:
-        telefone.setText(mask.maskFone(telefone.getText()));
-    }//GEN-LAST:event_telefoneKeyReleased
-
-    private void horasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_horasKeyReleased
-        // TODO add your handling code here:
-        if(horas.getText().length() == 4){
-            horas.setText(mask.maskHoras(horas.getText()));
-        }
-    }//GEN-LAST:event_horasKeyReleased
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        
-        Home menu = new Home();
-        
-        menu.setVisible(true);
-        this.dispose();
-        
-        
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -454,7 +374,7 @@ public class Cadastro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro().setVisible(true);
+                new Cadastro1().setVisible(true);
                 
                 
                 
@@ -463,29 +383,22 @@ public class Cadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cpf;
     private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
+    private javax.swing.JTextField funcao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nome;
+    private javax.swing.JTextField salario;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables
 }

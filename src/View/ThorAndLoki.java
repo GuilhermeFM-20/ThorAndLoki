@@ -80,6 +80,7 @@ public class ThorAndLoki{
     
     public String maskValor(float valor){
         
+        System.out.println(valor);
         
         Locale localBrasil = new Locale("pt", "BR");
         String moeda = NumberFormat.getCurrencyInstance(localBrasil).format(valor);
@@ -87,5 +88,6 @@ public class ThorAndLoki{
         return moeda.substring(2,moeda.length());
         
     }
+    
     
 }

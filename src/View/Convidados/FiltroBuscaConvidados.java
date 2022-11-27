@@ -2,28 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Professores;
+package View.Convidados;
 
 import View.CadastroTeste.*;
-import  Model.dao.PessoasDao;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Model.bean.Pessoas;
-import Model.bean.Professores;
+import Model.bean.Convidados;
+import Model.dao.ConvidadosDao;
 import View.ThorAndLoki;
+
 
 /**
  *
  * @author Guilherme Freire
  */
-public class FiltroBusca1 extends javax.swing.JFrame {
+public class FiltroBuscaConvidados extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
-    public FiltroBusca1() {
+    
+    ThorAndLoki mask = new ThorAndLoki();
+    
+    public FiltroBuscaConvidados() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
         setLocationRelativeTo(null);
@@ -40,10 +42,18 @@ public class FiltroBusca1 extends javax.swing.JFrame {
     
     public void loadTable(){
         
+        String valorBusca = "0.00";
         
-        Professores professores = new Professores(nome.getText(),cpf.getText(),endereco.getText(),telefone1.getText(), Float.parseFloat(salario.getText()), horas.getText());
-        PessoasDao dao = new PessoasDao();
-        ResultSet rs = dao.loadSearch(professores);
+        if(!valor.getText().equals("")){
+          
+            valorBusca = valor.getText();
+            
+        }
+        
+        
+        Convidados convidado = new Convidados(Float.parseFloat(valorBusca),nome.getText(),cpf.getText());
+        ConvidadosDao dao = new ConvidadosDao();
+        ResultSet rs = dao.loadSearch(convidado);
         
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
         
@@ -53,12 +63,10 @@ public class FiltroBusca1 extends javax.swing.JFrame {
             while(rs.next()){
                 
                 
-                model.addRow(new Object[]{rs.getString("alun_id")
-                                          ,rs.getString("alun_nome")
-                                          ,rs.getString("alun_cpf")
-                                          ,rs.getString("alun_idade")
-                                          ,rs.getString("alun_endereco")
-                                          ,rs.getString("alun_telefone")});
+                model.addRow(new Object[]{rs.getString("conv_id")
+                                          ,rs.getString("conv_nome")
+                                          ,mask.maskCpf(rs.getString("conv_cpf"))
+                                          ,rs.getString("conv_valor")});
 
             }
             
@@ -90,16 +98,17 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         telefone = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        salario = new javax.swing.JTextField();
         cpf = new javax.swing.JTextField();
-        horas = new javax.swing.JTextField();
-        telefone1 = new javax.swing.JTextField();
-        endereco = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPessoas = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        valor = new javax.swing.JFormattedTextField();
+        nome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -110,6 +119,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(7, 95, 133));
 
         jPanel1.setBackground(new java.awt.Color(31, 142, 243));
+        jPanel1.setPreferredSize(new java.awt.Dimension(222, 639));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,7 +140,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Visitantes");
+        jButton3.setText("Convidados");
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,62 +196,14 @@ public class FiltroBusca1 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Professores");
-
-        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nome.setForeground(new java.awt.Color(51, 51, 51));
-        nome.setText("Nome");
-        nome.setToolTipText("");
-        nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
-
-        salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        salario.setForeground(new java.awt.Color(51, 51, 51));
-        salario.setText("Salário");
-        salario.setBorder(null);
-        salario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salarioActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Cadastro");
 
         cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cpf.setForeground(new java.awt.Color(51, 51, 51));
-        cpf.setText("CPF");
         cpf.setBorder(null);
-        cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
-            }
-        });
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setText("Horas");
-        horas.setBorder(null);
-        horas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horasActionPerformed(evt);
-            }
-        });
-
-        telefone1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        telefone1.setForeground(new java.awt.Color(51, 51, 51));
-        telefone1.setText("Telefone");
-        telefone1.setBorder(null);
-
-        endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        endereco.setForeground(new java.awt.Color(51, 51, 51));
-        endereco.setText("Endereço");
-        endereco.setBorder(null);
-        endereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoActionPerformed(evt);
+        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cpfKeyReleased(evt);
             }
         });
 
@@ -284,7 +246,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Salário", "Telefone", "Horas", "Endereço"
+                "Id", "Nome", "CPF", "Valor"
             }
         ));
         tabelaPessoas.setFocusable(false);
@@ -299,62 +261,103 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaPessoas);
         if (tabelaPessoas.getColumnModel().getColumnCount() > 0) {
-            tabelaPessoas.getColumnModel().getColumn(0).setResizable(false);
             tabelaPessoas.getColumnModel().getColumn(0).setPreferredWidth(2);
         }
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nome:");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CPF:");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Valor:");
+
+        jFormattedTextField2.setBorder(null);
+        jFormattedTextField2.setForeground(new java.awt.Color(0, 0, 0));
+        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+
+        valor.setBorder(null);
+        valor.setForeground(new java.awt.Color(0, 0, 0));
+        valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+
+        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nome.setForeground(new java.awt.Color(51, 51, 51));
+        nome.setToolTipText("");
+        nome.setBorder(null);
+        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout telefoneLayout = new javax.swing.GroupLayout(telefone);
         telefone.setLayout(telefoneLayout);
         telefoneLayout.setHorizontalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(362, 362, 362)
+                        .addComponent(jLabel2))
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addGroup(telefoneLayout.createSequentialGroup()
-                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(telefoneLayout.createSequentialGroup()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(telefoneLayout.createSequentialGroup()
+                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(valor, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(319, 319, 319))
+            .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(telefoneLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         telefoneLayout.setVerticalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(6, 6, 6)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(telefoneLayout.createSequentialGroup()
+                    .addGap(0, 310, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 310, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -366,16 +369,16 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                    .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,53 +403,42 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+    private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
 
-    private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salarioActionPerformed
+        int linha = tabelaPessoas.getSelectedRow();
 
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
+        int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
 
-    private void horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_horasActionPerformed
+        View.Convidados.Atualizar1 menu = new View.Convidados.Atualizar1(id_pessoa);
+        menu.setVisible(true);
+        this.dispose();
 
-    private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        this.loadTable();
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_tabelaPessoasMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
-        Cadastro menu = new Cadastro();
+
+        View.Convidados.Cadastro1 menu = new View.Convidados.Cadastro1();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void tabelaPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoasMouseClicked
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
-        int linha = tabelaPessoas.getSelectedRow();
-        
-        int id_pessoa = Integer.parseInt(tabelaPessoas.getModel().getValueAt(linha, 0).toString());
-        
-        
-        Atualizar menu = new Atualizar(id_pessoa);
-        menu.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_tabelaPessoasMouseClicked
+        this.loadTable();
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void cpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfKeyReleased
+        // TODO add your handling code here:
+        cpf.setText(mask.maskCpf(cpf.getText()));
+
+    }//GEN-LAST:event_cpfKeyReleased
+
+    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,14 +457,62 @@ public class FiltroBusca1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltroBusca1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FiltroBuscaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -493,7 +533,7 @@ public class FiltroBusca1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltroBusca1().setVisible(true);
+                new FiltroBuscaConvidados().setVisible(true);
                 
                 
                 
@@ -503,24 +543,25 @@ public class FiltroBusca1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
-    private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nome;
-    private javax.swing.JTextField salario;
     private javax.swing.JTable tabelaPessoas;
     private javax.swing.JPanel telefone;
-    private javax.swing.JTextField telefone1;
+    private javax.swing.JFormattedTextField valor;
     // End of variables declaration//GEN-END:variables
 }

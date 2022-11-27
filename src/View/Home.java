@@ -5,7 +5,6 @@
 package View;
 
 import View.Alunos.FiltroBuscaAlunos;
-import View.CadastroTeste.FiltroBusca;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -171,11 +170,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessoresActionPerformed
         // TODO add your handling code here:
-        
-        FiltroBusca  menuCadastro = new FiltroBusca();
-        
-        menuCadastro.setVisible(true);
-        this.dispose();
+       
         
     }//GEN-LAST:event_btnProfessoresActionPerformed
 

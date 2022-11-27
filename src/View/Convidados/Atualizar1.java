@@ -2,35 +2,79 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Professores;
+package View.Convidados;
 
 import View.CadastroTeste.*;
-import Model.bean.Pessoas;
-import  Model.dao.PessoasDao;
+import Connection.Conexao;
+import Model.bean.Convidados;
+import Model.dao.ConvidadosDao;
 import View.ThorAndLoki;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Guilherme Freire
  */
-public class Cadastro1 extends javax.swing.JFrame {
-
+public class Atualizar1 extends javax.swing.JFrame {
+    
+    private int id_convidado;
     /**
      * Creates new form Home
      */
-    public Cadastro1() {
+    
+    ThorAndLoki mask = new ThorAndLoki();
+    
+    private Atualizar1() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public Atualizar1(int id_convidado) {
         initComponents();
+        
         ThorAndLoki menu = new ThorAndLoki();
+        
         setLocationRelativeTo(null);
         
         menu.addIcon(this);
-         
+        
+        this.setId_convidado(id_convidado);
+        
+        this.loadOnce(id_convidado);
+        
+        
+        
+        
+    }
+
+    public int getId_convidado(){
+        return id_convidado;
+    }
+    
+    public void setId_convidado(int id){
+        this.id_convidado = id;
+    }
+    
+    public void loadOnce(int id){
+        
+        Conexao conn = new Conexao();
+        
+        ResultSet rs = conn.dataLoad("convidados", id);
+        
+        try{
+            
+            while(rs.next()){
+                nome.setText(rs.getString("conv_nome"));
+                cpf.setText(rs.getString("conv_cpf"));
+                valor.setText(rs.getString("conv_valor"));
+            }
+        }catch(Exception ex){
+            
+            System.out.println("Erro ao carregar os valores: " + ex);
+            
+        }
+        
+        
     }
 
     /**
@@ -52,14 +96,15 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        salario = new javax.swing.JTextField();
-        cpf = new javax.swing.JTextField();
-        horas = new javax.swing.JTextField();
-        telefone = new javax.swing.JTextField();
-        endereco = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        cpf = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
+        valor = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        nome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -91,7 +136,7 @@ public class Cadastro1 extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(0, 169, 241));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Visitantes");
+        jButton3.setText("Convidados");
 
         jButton4.setBackground(new java.awt.Color(0, 169, 241));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,77 +189,16 @@ public class Cadastro1 extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
+        jPanel3.setPreferredSize(new java.awt.Dimension(834, 419));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro");
+        jLabel2.setText("Atualizar");
 
-        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nome.setForeground(new java.awt.Color(51, 51, 51));
-        nome.setText("Nome");
-        nome.setToolTipText("");
-        nome.setBorder(null);
-        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
-
-        salario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        salario.setForeground(new java.awt.Color(51, 51, 51));
-        salario.setText("Salário");
-        salario.setBorder(null);
-        salario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salarioActionPerformed(evt);
-            }
-        });
-
-        cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cpf.setForeground(new java.awt.Color(51, 51, 51));
-        cpf.setText("CPF");
-        cpf.setBorder(null);
-        cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
-            }
-        });
-
-        horas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        horas.setForeground(new java.awt.Color(51, 51, 51));
-        horas.setText("Horas");
-        horas.setBorder(null);
-        horas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horasActionPerformed(evt);
-            }
-        });
-
-        telefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        telefone.setForeground(new java.awt.Color(51, 51, 51));
-        telefone.setText("Telefone");
-        telefone.setBorder(null);
-        telefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneActionPerformed(evt);
-            }
-        });
-
-        endereco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        endereco.setForeground(new java.awt.Color(51, 51, 51));
-        endereco.setText("Endereço");
-        endereco.setBorder(null);
-        endereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(22, 161, 78));
+        jButton6.setBackground(new java.awt.Color(31, 142, 243));
         jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Gravar");
+        jButton6.setText("Atualizar");
         jButton6.setBorder(null);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +210,53 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
+            }
+        });
+
+        cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cpf.setForeground(new java.awt.Color(51, 51, 51));
+        cpf.setBorder(null);
+        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cpfKeyReleased(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(249, 94, 104));
+        jButton7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Excluir");
+        jButton7.setBorder(null);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        valor.setBorder(null);
+        valor.setForeground(new java.awt.Color(0, 0, 0));
+        valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nome:");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("CPF:");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Valor:");
+
+        nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nome.setForeground(new java.awt.Color(51, 51, 51));
+        nome.setToolTipText("");
+        nome.setBorder(null);
+        nome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeActionPerformed(evt);
             }
         });
 
@@ -241,24 +272,20 @@ public class Cadastro1 extends javax.swing.JFrame {
                         .addGap(324, 324, 324)
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(205, 205, 205)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addGap(270, 270, 270)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,21 +294,23 @@ public class Cadastro1 extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addGap(136, 136, 136)
+                .addGap(74, 74, 74)
+                .addComponent(jLabel4)
+                .addGap(7, 7, 7)
+                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(7, 7, 7)
+                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -292,7 +321,7 @@ public class Cadastro1 extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -300,20 +329,20 @@ public class Cadastro1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, Short.MAX_VALUE)
         );
 
         pack();
@@ -331,60 +360,90 @@ public class Cadastro1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
 
-    private void salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarioActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_salarioActionPerformed
 
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
+        Conexao conn = new Conexao();
+        FiltroBuscaConvidados menu = new FiltroBuscaConvidados();
 
-    private void horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_horasActionPerformed
+        try{
 
-    private void telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneActionPerformed
+            conn.delete("convidados", this.getId_convidado());
+            JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
 
-    private void enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoActionPerformed
+        }catch(Exception ex){
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        
-        Pessoas pessoa = new Pessoas(nome.getText(),cpf.getText(),endereco.getText(),telefone.getText(),14);
-        PessoasDao dao = new PessoasDao();
-        
-        try {
-            dao.addPessoa(pessoa);
-        } catch (Exception ex) {
-            Logger.getLogger(Cadastro1.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro na exclusão!");
         }
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
+
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void cpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfKeyReleased
+        // TODO add your handling code here:
+        cpf.setText(mask.maskCpf(cpf.getText()));
+    }//GEN-LAST:event_cpfKeyReleased
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        
-        FiltroBusca menu = new FiltroBusca();
-        
+
+        FiltroBuscaConvidados menu = new FiltroBuscaConvidados();
+        menu.loadTable();
         menu.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        FiltroBuscaConvidados menu = new FiltroBuscaConvidados();
+
+        System.out.println(nome.getText());
+
+        ConvidadosDao dao = new ConvidadosDao();
+
+        Convidados convidado = new Convidados(Float.parseFloat(valor.getText()),nome.getText(),cpf.getText());
+
+        dao.updateConvidado(convidado, this.id_convidado);
+        menu.loadTable();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Atualizar1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro1().setVisible(true);
+                new Atualizar1().setVisible(true);
                 
                 
                 
@@ -394,22 +453,23 @@ public class Cadastro1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpf;
-    private javax.swing.JTextField endereco;
-    private javax.swing.JTextField horas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nome;
-    private javax.swing.JTextField salario;
-    private javax.swing.JTextField telefone;
+    private javax.swing.JFormattedTextField valor;
     // End of variables declaration//GEN-END:variables
 }
