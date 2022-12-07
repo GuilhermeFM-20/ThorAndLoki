@@ -72,18 +72,18 @@ public class ThorAndLoki{
              return mask.valueToString(hora);
             
         } catch (ParseException ex) {
-            System.out.println("erro :" + ex);
+            System.out.println("erro :" + ex.getMessage());
         }
         return null;
         
     }
     
-    public String maskValor(float valor){
+    public String maskValor(String valor){
         
         System.out.println(valor);
         
         Locale localBrasil = new Locale("pt", "BR");
-        String moeda = NumberFormat.getCurrencyInstance(localBrasil).format(valor);
+        String moeda = NumberFormat.getCurrencyInstance(localBrasil).format(Float.parseFloat(valor));
         
         return moeda.substring(2,moeda.length());
         

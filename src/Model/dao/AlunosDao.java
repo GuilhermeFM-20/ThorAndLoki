@@ -56,11 +56,12 @@ public class AlunosDao {
             addQuery += " AND alun_telefone = " + alunos.getTelefone().trim();
 
         }
-        /*if (alunos.getMensalidade() > 0){
+        
+        if(alunos.getMensalidade() > 0){
 
             addQuery += " AND alun_mensalidade = " + alunos.getMensalidade();
 
-        }*/
+        }
         if(alunos.getMultaAtraso() != 0.00){
 
             addQuery += " AND alun_multa = " + alunos.getMultaAtraso();
@@ -106,6 +107,11 @@ public class AlunosDao {
 
            erro += "Digite um Telefone ";
 
+        }
+        if(aluno.getIdade() < 11){
+            
+           erro += "Idade inválida";
+            
         }
         
         

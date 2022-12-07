@@ -25,6 +25,9 @@ public class CadastroProf extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    
+    ThorAndLoki mask = new ThorAndLoki();
+    
     public CadastroProf() {
         initComponents();
         ThorAndLoki menu = new ThorAndLoki();
@@ -162,14 +165,14 @@ public class CadastroProf extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 167, 243));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Professores");
+        jLabel2.setText("Cadastro");
 
         nome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         nome.setForeground(new java.awt.Color(51, 51, 51));
@@ -190,6 +193,11 @@ public class CadastroProf extends javax.swing.JFrame {
                 salarioActionPerformed(evt);
             }
         });
+        salario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                salarioKeyReleased(evt);
+            }
+        });
 
         cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cpf.setForeground(new java.awt.Color(51, 51, 51));
@@ -197,6 +205,11 @@ public class CadastroProf extends javax.swing.JFrame {
         cpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cpfActionPerformed(evt);
+            }
+        });
+        cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cpfKeyReleased(evt);
             }
         });
 
@@ -208,6 +221,11 @@ public class CadastroProf extends javax.swing.JFrame {
                 horasActionPerformed(evt);
             }
         });
+        horas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                horasKeyReleased(evt);
+            }
+        });
 
         telefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         telefone.setForeground(new java.awt.Color(51, 51, 51));
@@ -215,6 +233,11 @@ public class CadastroProf extends javax.swing.JFrame {
         telefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefoneActionPerformed(evt);
+            }
+        });
+        telefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telefoneKeyReleased(evt);
             }
         });
 
@@ -277,9 +300,7 @@ public class CadastroProf extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel5)
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,19 +323,22 @@ public class CadastroProf extends javax.swing.JFrame {
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(235, 235, 235))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2))
                 .addGap(114, 114, 114)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -341,7 +365,7 @@ public class CadastroProf extends javax.swing.JFrame {
                     .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -362,7 +386,7 @@ public class CadastroProf extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -424,7 +448,11 @@ public class CadastroProf extends javax.swing.JFrame {
 
         if (!salario.getText().equals("")) {
 
-            salario2 = salario.getText();
+            if(Float.parseFloat(salario.getText()) > 0){
+                salario2 = salario.getText();
+            }else{
+                  JOptionPane.showMessageDialog(null, "Valor inválido!: " );
+            }
 
         }
 
@@ -466,6 +494,30 @@ public class CadastroProf extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void telefoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneKeyReleased
+        // TODO add your handling code here:
+        telefone.setText(mask.maskFone(telefone.getText()));
+    }//GEN-LAST:event_telefoneKeyReleased
+
+    private void cpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfKeyReleased
+        // TODO add your handling code here:
+        ThorAndLoki mask = new  ThorAndLoki();
+        cpf.setText(mask.maskCpf(cpf.getText()));
+    }//GEN-LAST:event_cpfKeyReleased
+
+    private void horasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_horasKeyReleased
+        // TODO add your handling code here:
+        ThorAndLoki mask = new  ThorAndLoki();
+        if(horas.getText().length() > 3){
+        horas.setText(mask.maskHoras(horas.getText()));
+        }
+    }//GEN-LAST:event_horasKeyReleased
+
+    private void salarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_salarioKeyReleased
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_salarioKeyReleased
 
     /**
      * @param args the command line arguments

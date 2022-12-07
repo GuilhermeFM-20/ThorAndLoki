@@ -417,19 +417,17 @@ public class FiltroBuscaAlunos extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(telefoneLayout.createSequentialGroup()
+                .addGap(338, 338, 338)
                 .addComponent(jLabel2)
-                .addGap(335, 335, 335))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         telefoneLayout.setVerticalGroup(
             telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(telefoneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(telefoneLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(36, 36, 36)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
@@ -451,7 +449,9 @@ public class FiltroBuscaAlunos extends javax.swing.JFrame {
                             .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -551,13 +551,6 @@ public class FiltroBuscaAlunos extends javax.swing.JFrame {
         cpf.setText(mask.maskCpf(cpf.getText()));
     }//GEN-LAST:event_cpfKeyReleased
 
-    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
-        // TODO add your handling code here:
-        if(multaatraso.getText().length() == 4){
-            multaatraso.setText(mask.maskHoras(multaatraso.getText()));
-        }
-    }//GEN-LAST:event_multaatrasoKeyReleased
-
     private void telefone1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefone1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_telefone1KeyReleased
@@ -579,6 +572,13 @@ public class FiltroBuscaAlunos extends javax.swing.JFrame {
     menu.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
+        // TODO add your handling code here:
+        if(multaatraso.getText().length() == 4){
+            multaatraso.setText(mask.maskHoras(multaatraso.getText()));
+        }
+    }//GEN-LAST:event_multaatrasoKeyReleased
 
     /**
      * @param args the command line arguments

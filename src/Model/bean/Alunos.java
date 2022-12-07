@@ -13,6 +13,7 @@ public class Alunos extends Pessoas{
         
         this.setMensalidade(mensalidade);
         this.setMultaAtraso(multaatraso);
+        this.setIdade(idade);
         
     }
     
@@ -27,15 +28,10 @@ public class Alunos extends Pessoas{
     }
 
     public void setIdade(int idade) {
-        if(idade < 11){
-            
-           System.out.println("Idade inválida");
-            
-        }else{
+       
             
             this.idade = idade;
             
-        }
     }
     
     public void setMensalidade(String mensalidade) {

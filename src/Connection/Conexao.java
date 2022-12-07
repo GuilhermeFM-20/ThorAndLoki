@@ -30,7 +30,8 @@ public class Conexao {
         //Inicia a conexão no banco 
         try {
 
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/thorandloki",
+            "root", "");
 
             System.out.println("Conexão Muito bem sucedida!");
 
@@ -39,7 +40,8 @@ public class Conexao {
         } catch (SQLException e) {
 
             System.out.println("Conexão mal sucedida!" + e.getMessage());
-            JOptionPane.showMessageDialog(null, e, "Banco de dados não está online! " + e.getMessage(), 0);
+            JOptionPane.showMessageDialog(null, e, 
+             "Banco de dados não está online! " + e.getMessage(), 0);
 
         }
 

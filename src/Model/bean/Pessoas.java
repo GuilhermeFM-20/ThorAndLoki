@@ -24,22 +24,6 @@ package Model.bean;
         
     }
 
-    /*public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        if(idade < 11){
-            
-           System.out.println("Idade inválida");
-            
-        }else{
-            
-            this.idade = idade;
-            
-        }
-    }*/
-
     public String getNome() {
         return nome;
     }

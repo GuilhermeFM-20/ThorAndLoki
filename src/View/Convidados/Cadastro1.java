@@ -9,6 +9,7 @@ import Model.dao.ConvidadosDao;
 import View.ThorAndLoki;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,7 +57,7 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        valor = new javax.swing.JFormattedTextField();
+        valor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
@@ -206,9 +207,9 @@ public class Cadastro1 extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Valor:");
 
+        valor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        valor.setForeground(new java.awt.Color(51, 51, 51));
         valor.setBorder(null);
-        valor.setForeground(new java.awt.Color(0, 0, 0));
-        valor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -226,13 +227,13 @@ public class Cadastro1 extends javax.swing.JFrame {
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(275, 275, 275)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(jLabel4)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(valor, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))
                 .addContainerGap(291, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -321,7 +322,17 @@ public class Cadastro1 extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        Convidados convidado = new Convidados(Float.parseFloat(valor.getText()), nome.getText(), cpf.getText());
+        String salarioBusca = "0.00";
+        
+        if(!valor.getText().equals("")){
+            if(Float.parseFloat(valor.getText()) > 0){
+                      salarioBusca  = valor.getText();
+            }else{
+                  JOptionPane.showMessageDialog(null, "Valor inválido!: " );
+            }
+        }
+        
+        Convidados convidado = new Convidados(Float.parseFloat(salarioBusca), nome.getText(), cpf.getText());
         ConvidadosDao dao = new ConvidadosDao();
 
         try {
@@ -388,6 +399,6 @@ public class Cadastro1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nome;
-    private javax.swing.JFormattedTextField valor;
+    private javax.swing.JTextField valor;
     // End of variables declaration//GEN-END:variables
 }

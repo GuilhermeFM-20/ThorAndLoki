@@ -63,9 +63,16 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
             
         }
         
+        /*switch(Mensalidade.getSelectedItem().toString()){
+            
+            case "Básico":
+            
+        }*/
+        
         Alunos aluno = new Alunos(nome1.getText(),cpf.getText(),endereco.getText(),telefone1.getText(),Integer.parseInt(idadeBusca),Mensalidade.getSelectedItem().toString(),Float.parseFloat(multaBusca));
         AlunosDao dao = new AlunosDao();
         ResultSet rs = dao.loadSearch(aluno);
+
         
         DefaultTableModel model = (DefaultTableModel) tabelaPessoas.getModel();
         
@@ -114,7 +121,6 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         telefone = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        multaatraso = new javax.swing.JTextField();
         cpf = new javax.swing.JTextField();
         endereco = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -132,12 +138,12 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         telefone1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         Mensalidade = new javax.swing.JComboBox<>();
+        multaatraso = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(7, 95, 133));
         setIconImages(null);
         setLocation(new java.awt.Point(250, 100));
-        setPreferredSize(new java.awt.Dimension(1110, 702));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(7, 95, 133));
@@ -232,17 +238,6 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Filtro de Busca");
-
-        multaatraso.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        multaatraso.setForeground(new java.awt.Color(51, 51, 51));
-        multaatraso.setToolTipText("");
-        multaatraso.setBorder(null);
-        multaatraso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        multaatraso.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                multaatrasoKeyReleased(evt);
-            }
-        });
 
         cpf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cpf.setForeground(new java.awt.Color(51, 51, 51));
@@ -376,6 +371,16 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
             }
         });
 
+        multaatraso.setBackground(new java.awt.Color(255, 255, 255));
+        multaatraso.setBorder(null);
+        multaatraso.setForeground(new java.awt.Color(0, 0, 0));
+        multaatraso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        multaatraso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                multaatrasoKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout telefoneLayout = new javax.swing.GroupLayout(telefone);
         telefone.setLayout(telefoneLayout);
         telefoneLayout.setHorizontalGroup(
@@ -413,7 +418,7 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addGap(6, 6, 6)
                         .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -446,15 +451,16 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11))
-                        .addGap(9, 9, 9)
-                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(multaatraso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telefoneLayout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(Mensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -472,7 +478,7 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +486,7 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -488,11 +494,11 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
 
         pack();
@@ -552,13 +558,6 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         cpf.setText(mask.maskCpf(cpf.getText()));
     }//GEN-LAST:event_cpfKeyReleased
 
-    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
-        // TODO add your handling code here:
-        if(multaatraso.getText().length() == 4){
-            multaatraso.setText(mask.maskHoras(multaatraso.getText()));
-        }
-    }//GEN-LAST:event_multaatrasoKeyReleased
-
     private void telefone1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefone1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_telefone1KeyReleased
@@ -580,6 +579,10 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
     menu.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void multaatrasoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_multaatrasoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_multaatrasoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -610,65 +613,7 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+ 
         //</editor-fold>
 
         /* Create and display the form */
@@ -706,7 +651,7 @@ public class FiltroBuscaAlunos2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField multaatraso;
+    private javax.swing.JFormattedTextField multaatraso;
     private javax.swing.JTextField nome1;
     private javax.swing.JTable tabelaPessoas;
     private javax.swing.JPanel telefone;

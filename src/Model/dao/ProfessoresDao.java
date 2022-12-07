@@ -49,7 +49,7 @@ public class ProfessoresDao {
         }
         if (!professores.getTelefone().equals("Telefone") && !professores.getTelefone().equals("")){
         
-            addQuery += "AND prof_telefone LIKE '%" + professores.getNome().trim() + "%'";
+            addQuery += "AND prof_telefone LIKE '%" + professores.getTelefone() + "%'";
             
         }
         if (professores.getSalario() != 0.00){
